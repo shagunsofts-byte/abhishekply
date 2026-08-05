@@ -1,0 +1,57 @@
+{
+  "collections": [
+    {
+      "name": "products",
+      "description": "Store products with Cloudinary image URLs.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "price": { "type": "number" },
+          "image": { "type": "string" },
+          "category": { "type": "string" },
+          "brand": { "type": "string" },
+          "inStock": { "type": "boolean" },
+          "specifications": { "type": "object" }
+        },
+        "required": ["name", "price", "image", "category"]
+      },
+      "indexes": []
+    },
+    {
+      "name": "orders",
+      "description": "User orders containing products, total amount, and user details.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "items": { "type": "array", "items": { "type": "object" } },
+          "totalAmount": { "type": "number" },
+          "status": { "type": "string", "enum": ["pending", "confirmed", "shipped", "delivered", "cancelled"] },
+          "customerDetails": { "type": "object" },
+          "createdAt": { "type": "timestamp" }
+        },
+        "required": ["items", "status", "customerDetails", "createdAt"]
+      },
+      "indexes": []
+    },
+    {
+      "name": "users",
+      "description": "User profiles.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "uid": { "type": "string" },
+          "email": { "type": "string" },
+          "displayName": { "type": "string" },
+          "role": { "type": "string", "enum": ["customer", "admin"] },
+          "createdAt": { "type": "timestamp" }
+        },
+        "required": ["uid", "email", "role"]
+      },
+      "indexes": []
+    }
+  ]
+}
