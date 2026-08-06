@@ -137,7 +137,10 @@ const SectionHeader = ({ title }: { title: string }) => (
 export const ProductDetails = () => {
   const { id } = useParams();
   const { products, loading } = useProducts();
-  const product = products.find(p => p.id === id) || STATIC_PRODUCTS.find(p => p.id === id);
+  // Match by id OR slug so both Firebase Firestore IDs and catalog slug-IDs work
+  const product =
+    products.find(p => p.id === id || p.slug === id) ||
+    STATIC_PRODUCTS.find(p => p.id === id || p.slug === id);
 
   const [activeImage, setActiveImage] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -228,7 +231,8 @@ export const ProductDetails = () => {
   };
 
   // ── Loading state ────────────────────────────────────────────────────────
-  if (loading)
+  // Only show spinner if firebase is still loading AND product not found in static catalog yet
+  if (loading && !product)
     return (
       <div className="pt-24 min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">

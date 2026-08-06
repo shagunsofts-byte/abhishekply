@@ -46,13 +46,23 @@ export function useProducts() {
       try {
         const snapshot = await getDocs(collection(db, 'products'));
         if (!snapshot.empty) {
-          const dbProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Product));
+          const dbProducts = snapshot.docs.map(doc => {
+            const data = doc.data() as Product;
+            // Use slug as id so URL-based lookup works (/product/:id uses slug)
+            // If product has a slug, use that as id; otherwise use Firestore doc id
+            return {
+              ...data,
+              id: data.slug || data.id || doc.id,
+            } as Product;
+          });
           setProducts(dbProducts);
         } else {
           setProducts(PRODUCTS);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
+        // On error, keep static products so page still works
+        setProducts(PRODUCTS);
       } finally {
         setLoading(false);
       }
