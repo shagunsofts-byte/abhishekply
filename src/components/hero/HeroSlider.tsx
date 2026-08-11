@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SITE_CONFIG } from '../../data/siteConfig';
+import { CategoryDock } from '../category/CategoryDock';
 
 const SLIDES = [
   {
@@ -52,7 +53,7 @@ export const HeroSlider = () => {
   }, []);
 
   return (
-    <section className="relative w-full flex items-center min-h-[calc(100vh-96px)] overflow-hidden bg-[#f3f2ee]">
+    <section className="relative w-full flex items-center min-h-screen overflow-hidden bg-[#f3f2ee]">
       {/* Background Hardware Showroom Image Layer */}
       <div className="absolute inset-0 w-full h-full flex justify-end z-0 pointer-events-none overflow-hidden">
         {/* Full Image Element */}
@@ -154,6 +155,11 @@ export const HeroSlider = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Floating Quick-Browse Dock — overlaps the hero/next-section boundary */}
+      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-30 hidden sm:flex justify-center">
+        <CategoryDock />
       </div>
     </section>
   );

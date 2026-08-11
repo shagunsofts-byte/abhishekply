@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone, ChevronRight, Check, ShieldCheck } from 'lucide-react';
+import { MessageCircle, Phone, ChevronRight, Check, ShieldCheck, ShoppingBag } from 'lucide-react';
 import { PRODUCTS } from '../data/catalog';
 import categoriesData from '../data/categories.json';
 import { ProductCard } from '../components/ProductCard';
 import { SeoWrapper } from '../components/SeoWrapper';
 import { SITE_CONFIG } from '../data/siteConfig';
+import { useQuote } from '../context/QuoteContext';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = PRODUCTS.find((p) => p.slug === slug);
   const [activeImage, setActiveImage] = useState(0);
+  const { addToQuote, isInQuote } = useQuote();
 
   if (!product) {
     return <Navigate to="/products" replace />;
@@ -158,6 +160,19 @@ export default function ProductDetailPage() {
               )}
 
               {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                <button
+                  onClick={() => !isInQuote(product.id) && addToQuote(product)}
+                  className={`flex-1 py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors ${
+                    isInQuote(product.id)
+                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                      : 'bg-zinc-900 hover:bg-amber-600 text-white'
+                  }`}
+                >
+                  {isInQuote(product.id) ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
+                  {isInQuote(product.id) ? 'Added to Quote List' : 'Add to Quote'}
+                </button>
+              </div>
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
                 <a
                   href={waLink}
@@ -169,7 +184,7 @@ export default function ProductDetailPage() {
                 </a>
                 <a
                   href={`tel:+91${SITE_CONFIG.primaryPhone}`}
-                  className="flex-1 bg-zinc-900 hover:bg-amber-600 text-white py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors"
+                  className="flex-1 bg-white border border-zinc-200 hover:border-amber-400 text-zinc-900 py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call for Pricing
                 </a>

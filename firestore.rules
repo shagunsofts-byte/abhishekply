@@ -20,6 +20,15 @@ service cloud.firestore {
       allow update, delete: if isAdmin();
     }
 
+    match /quoteRequests/{requestId} {
+      // Anyone (including guests) can submit a quote request from the site —
+      // this is the "Add to Quote" checkout flow, equivalent to a contact form.
+      allow create: if request.resource.data.keys().hasAll(['items', 'status', 'createdAt'])
+                    && request.resource.data.status == 'new';
+      // Only the admin can view or manage submitted quote requests.
+      allow read, update, delete: if isAdmin();
+    }
+
     match /users/{userId} {
       allow read: if isAdmin() || request.auth.uid == userId;
       // Users may only ever create themselves as a non-admin account.

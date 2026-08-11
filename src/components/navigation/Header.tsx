@@ -2,15 +2,18 @@ import { SITE_CONFIG } from "../../data/siteConfig";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Search } from 'lucide-react';
+import { Menu, Search, ShoppingBag } from 'lucide-react';
 import { NAVIGATION_DATA } from '../../data/navigation';
 import { DesktopMegaMenu } from './DesktopMegaMenu';
 import { MobileMenu } from './MobileMenu';
 import { SearchModal } from './SearchModal';
+import { useQuote } from '../../context/QuoteContext';
+import { QuoteDrawer } from '../quote/QuoteDrawer';
 
 export const Header = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const { openDrawer, totalItems } = useQuote();
   
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -114,6 +117,19 @@ export const Header = () => {
                 <Search className="w-5 h-5" />
               </button>
 
+              <button
+                onClick={openDrawer}
+                aria-label="View quote list"
+                className="relative p-2 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-amber-500 text-zinc-950 text-[10px] font-outfit font-bold rounded-full flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+
               <div className="hidden sm:flex items-center gap-4 ml-2">
 
                 
@@ -164,6 +180,7 @@ export const Header = () => {
 
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
       <SearchModal isOpen={isSearchOpen} onClose={() => setSearchOpen(false)} />
+      <QuoteDrawer />
     </>
   );
 };

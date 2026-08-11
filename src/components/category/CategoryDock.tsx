@@ -6,33 +6,26 @@ export const CategoryDock = () => {
   const location = useLocation();
 
   return (
-    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-[90vw] md:max-w-max px-4">
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-2 shadow-[0_20px_40px_rgba(0,0,0,0.3)] overflow-x-auto no-scrollbar flex items-center gap-2">
+    <div className="w-full max-w-[92vw] md:max-w-max px-2">
+      <div className="bg-white/90 backdrop-blur-xl border border-zinc-100 rounded-full p-1.5 shadow-[0_20px_50px_-12px_rgba(24,24,27,0.18)] overflow-x-auto no-scrollbar flex items-center gap-1">
         {categoriesData.map((item) => {
           const path = `/products/${item.slug}`;
           const isActive = location.pathname.includes(item.slug);
 
           return (
-            <Link 
-              key={item.id} 
+            <Link
+              key={item.id}
               to={path}
-              className={`relative flex items-center gap-2 px-4 md:px-6 py-3 rounded-full transition-all border group overflow-hidden ${
-                isActive 
-                  ? 'border-amber-500/50 bg-white/20 shadow-[0_0_15px_rgba(245,158,11,0.3)] -translate-y-1' 
-                  : 'border-transparent hover:border-amber-500/50 hover:bg-white/10 hover:-translate-y-1'
+              className={`relative flex items-center gap-2 px-4 md:px-5 py-2.5 rounded-full transition-all duration-300 group whitespace-nowrap ${
+                isActive
+                  ? 'bg-zinc-900 text-white shadow-sm'
+                  : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
               }`}
             >
-              <span className="text-xl relative z-10">{item.icon}</span>
-              <span className={`font-outfit font-medium text-sm md:text-base whitespace-nowrap transition-colors relative z-10 ${
-                isActive ? 'text-amber-400' : 'text-white group-hover:text-amber-400'
-              }`}>
+              <span className="text-base leading-none">{item.icon}</span>
+              <span className={`font-outfit font-medium text-xs md:text-sm ${isActive ? 'text-white' : ''}`}>
                 {item.name}
               </span>
-              
-              {/* Active Indicator / Hover Ripple */}
-              {isActive && (
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent pointer-events-none" />
-              )}
             </Link>
           );
         })}

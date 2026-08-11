@@ -4,7 +4,6 @@ import { FeaturedCollection } from './components/FeaturedCollection';
 import { TabbedCategoryGallery } from './components/TabbedCategoryGallery';
 import { SeoWrapper } from './components/SeoWrapper';
 import { HeroSlider } from "./components/hero/HeroSlider";
-import { CategoryDock } from './components/category/CategoryDock';
 import { SITE_CONFIG } from './data/siteConfig';
 import { ContactCard } from './components/ContactCard';
 import React, {
@@ -469,47 +468,100 @@ const VideoShortsCarousel = () => {
   );
 };
 
+// --- CONTACT / VISIT SECTION ---
+const ContactSection = () => {
+  return (
+    <section id="contact-section" className="bg-white py-20 md:py-28">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+        <div className="text-center mb-14">
+          <span className="text-xs font-outfit uppercase tracking-[0.2em] text-amber-600 font-semibold">Get In Touch</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-zinc-900 mt-3">Visit Our Showroom</h2>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <ContactCard />
+          <div className="rounded-3xl overflow-hidden border border-zinc-200 shadow-xl shadow-zinc-200/50 min-h-[360px]">
+            <iframe
+              title="Abhishek Ply & Hardware Location"
+              src={SITE_CONFIG.googleMapsUrl}
+              className="w-full h-full min-h-[360px]"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export const Footer = () => {
   return (
-    <footer id="contact" className="bg-zinc-100 pt-24 pb-8 border-t border-zinc-200 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-amber-900/10 blur-[100px] pointer-events-none" />
-      
-      <div className="px-4 md:px-8 lg:px-12 w-full relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          
-          <div className="lg:col-span-1">
-            <h3 className="font-serif text-2xl font-bold mb-6 tracking-wide text-zinc-900">ABHISHEK</h3>
-            <p className="text-zinc-600 font-inter text-sm mb-6 leading-relaxed">
-              The premier destination for luxury plywood, elegant laminates, and state-of-the-art architectural hardware in Bahraich.
+    <footer id="contact" className="bg-zinc-950 text-zinc-400 pt-20 pb-8 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
+
+      <div className="px-4 md:px-8 lg:px-12 max-w-7xl mx-auto w-full relative z-10">
+        {/* Top: brand + CTA */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-zinc-800">
+          <div className="max-w-md">
+            <span className="font-serif text-2xl font-bold text-white tracking-wide block mb-3">ABHISHEK</span>
+            <p className="text-sm font-inter leading-relaxed">
+              Premium plywood, laminates, veneers and architectural hardware — trusted in Bahraich since 1995.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-amber-500 hover:text-amber-500 transition-colors cursor-pointer"><Instagram className="w-4 h-4"/></a>
-              <a href="#" className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-amber-500 hover:text-amber-500 transition-colors cursor-pointer"><Facebook className="w-4 h-4"/></a>
-              <a href="#" className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-600 hover:border-amber-500 hover:text-amber-500 transition-colors cursor-pointer"><Twitter className="w-4 h-4"/></a>
-            </div>
           </div>
-
-          <div>
-            <h4 className="font-outfit font-semibold tracking-widest uppercase text-sm mb-6 text-zinc-900">Explore</h4>
-            <ul className="space-y-3 text-zinc-600 font-inter text-sm">
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/plywood">Premium Plywood</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/laminates">Decorative Laminates</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/interiors?type=kitchen">Modular Kitchens</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/hardware">Architectural Hardware</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Our Brands</Link></li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <ContactCard />
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-white text-zinc-900 px-6 py-3 rounded-full font-outfit font-medium text-sm hover:bg-amber-500 transition-colors text-center"
+            >
+              Chat on WhatsApp
+            </a>
+            <a
+              href={`tel:+91${SITE_CONFIG.primaryPhone}`}
+              className="border border-zinc-700 text-white px-6 py-3 rounded-full font-outfit font-medium text-sm hover:border-amber-500 hover:text-amber-500 transition-colors text-center"
+            >
+              +91 {SITE_CONFIG.primaryPhone}
+            </a>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500 font-inter">
+        {/* Middle: links + contact, single compact row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 text-sm font-inter">
+          <div>
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Shop</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/products/plywood" className="hover:text-amber-500 transition-colors">Plywood</Link></li>
+              <li><Link to="/products/laminates" className="hover:text-amber-500 transition-colors">Laminates</Link></li>
+              <li><Link to="/products/hardware" className="hover:text-amber-500 transition-colors">Hardware</Link></li>
+              <li><Link to="/products" className="hover:text-amber-500 transition-colors">All Products</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Company</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/products/interiors?type=kitchen" className="hover:text-amber-500 transition-colors">Modular Kitchens</Link></li>
+              <li><a href="#faq" className="hover:text-amber-500 transition-colors">FAQs</a></li>
+              <li><Link to="/" className="hover:text-amber-500 transition-colors">Home</Link></li>
+            </ul>
+          </div>
+          <div className="col-span-2 md:col-span-2">
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Visit the Showroom</h4>
+            <p className="leading-relaxed mb-3">{SITE_CONFIG.addressEnglish}</p>
+            <p className="text-xs text-zinc-500">
+              {SITE_CONFIG.businessHours.weekdays}: {SITE_CONFIG.businessHours.weekdayHours} · {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-6 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p>&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</p>
-          <div className="flex gap-6">
-            <span className="hover:text-zinc-700 cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-zinc-700 cursor-pointer transition-colors">Terms of Service</span>
+          <div className="flex items-center gap-4">
+            <a href="#" aria-label="Instagram" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Instagram className="w-3.5 h-3.5"/></a>
+            <a href="#" aria-label="Facebook" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Facebook className="w-3.5 h-3.5"/></a>
+            <a href="#" aria-label="Twitter" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Twitter className="w-3.5 h-3.5"/></a>
           </div>
         </div>
       </div>
@@ -573,15 +625,6 @@ export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimati
             transition={{ duration: 1 }}
           >
             <HeroSlider />
-            <section className="relative bg-zinc-950 py-10 md:py-12 overflow-hidden">
-              <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.15),transparent_60%)]" />
-              <p className="relative z-10 text-center text-xs font-outfit uppercase tracking-[0.2em] text-zinc-400 mb-6">
-                Quick Browse
-              </p>
-              <div className="relative h-16">
-                <CategoryDock />
-              </div>
-            </section>
             <TabbedCategoryGallery />
             
             <Marquee />
@@ -592,6 +635,7 @@ export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimati
             <Stats />
             <FAQ />
             <VideoShortsCarousel />
+            <ContactSection />
           </motion.div>
         </DoorTransition>
       </main>

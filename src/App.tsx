@@ -9,10 +9,22 @@ import { SITE_CONFIG } from './data/siteConfig';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { QuoteProvider } from './context/QuoteContext';
+
+const AdminLoginPage = React.lazy(() => import('./pages/admin/AdminLoginPage'));
+const AdminQuotesPage = React.lazy(() => import('./pages/admin/AdminQuotesPage'));
 
 // --- FLOATING ACTION BUTTONS ---
+const AdminLoadingFallback = () => (
+  <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+  </div>
+);
+
 const FloatingActions = () => {
-  
+  const location = useLocation();
+  if (location.pathname.startsWith('/admin')) return null;
+
   return (
     
     <div className="fixed bottom-8 right-8 z-[100] hidden md:flex flex-col gap-4">
@@ -67,6 +79,8 @@ const AnimatedRoutes = ({ hasBootAnimationPlayed, setHasBootAnimationPlayed }: a
         <Route path="/products/:category" element={<><Navbar /><CatalogPage /><Footer /></>} />
         <Route path="/catalog" element={<Navigate to="/products" replace />} />
         <Route path="/product/:slug" element={<><Navbar /><ProductDetailPage /><Footer /></>} />
+        <Route path="/admin/login" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminLoginPage /></React.Suspense>} />
+        <Route path="/admin/quotes" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminQuotesPage /></React.Suspense>} />
         <Route path="*" element={<><Navbar /><NotFoundPage /><Footer /></>} />
         </Routes>
       </motion.div>
@@ -79,6 +93,7 @@ export default function App() {
 
   return (
     <HelmetProvider>
+      <QuoteProvider>
               <BrowserRouter>
           <div className="w-full min-h-screen overflow-x-hidden font-inter flex flex-col selection:bg-amber-500/30">
             <AnimatedRoutes hasBootAnimationPlayed={hasBootAnimationPlayed} setHasBootAnimationPlayed={setHasBootAnimationPlayed} />
@@ -86,6 +101,7 @@ export default function App() {
             <FloatingActions />
                                   </div>
         </BrowserRouter>
+      </QuoteProvider>
           </HelmetProvider>
   );
 }
