@@ -157,8 +157,8 @@ export const HeroSlider = () => {
         </div>
       </div>
 
-      {/* Floating Quick-Browse Dock — overlaps the hero/next-section boundary */}
-      <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-30 hidden sm:flex justify-center">
+      {/* Quick-Browse Dock — desktop only, kept inside the hero's bounds so it isn't clipped */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden lg:flex justify-center">
         <CategoryDock />
       </div>
     </section>
