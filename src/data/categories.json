@@ -3,7 +3,7 @@
     "id": "plywood",
     "name": "Plywood",
     "slug": "plywood",
-    "icon": "🪵",
+    "icon": "\ud83e\udeb5",
     "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
     "description": "Premium quality plywood for exceptional strength and durability, perfect for all your interior and furniture needs."
   },
@@ -11,15 +11,23 @@
     "id": "laminates",
     "name": "Laminates",
     "slug": "laminates",
-    "icon": "✨",
+    "icon": "\u2728",
     "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2070&auto=format&fit=crop",
     "description": "Exquisite laminates offering a wide range of colors, textures, and finishes to elevate your living spaces."
+  },
+  {
+    "id": "veneers",
+    "name": "Veneers",
+    "slug": "veneers",
+    "icon": "\ud83c\udf33",
+    "image": "https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=2070&auto=format&fit=crop",
+    "description": "Authentic wood veneers offering the timeless elegance and warmth of natural wood to your premium furniture."
   },
   {
     "id": "doors",
     "name": "Doors",
     "slug": "doors",
-    "icon": "🚪",
+    "icon": "\ud83d\udeaa",
     "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2070&auto=format&fit=crop",
     "description": "A curated collection of premium doors that blend security, functionality, and timeless aesthetic appeal."
   },
@@ -27,7 +35,7 @@
     "id": "hardware",
     "name": "Hardware",
     "slug": "hardware",
-    "icon": "🔐",
+    "icon": "\ud83d\udd10",
     "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop",
     "description": "Top-tier architectural hardware, handles, and locks offering smooth operation and superior finishes."
   },
@@ -35,7 +43,7 @@
     "id": "interiors",
     "name": "Interiors",
     "slug": "interiors",
-    "icon": "🏠",
+    "icon": "\ud83c\udfe0",
     "image": "https://images.unsplash.com/photo-1600566753086-00f18efc2291?q=80&w=2070&auto=format&fit=crop",
     "description": "Complete interior solutions, from modular kitchens to elegant wardrobes, crafted to perfection."
   }

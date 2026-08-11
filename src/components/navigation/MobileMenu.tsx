@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, Phone, MessageCircle, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { NAVIGATION_DATA, MenuItem } from '../../data/navigation';
+import { NAVIGATION_DATA } from '../../data/navigation';
 
 interface MobileMenuProps {
   isOpen: boolean;

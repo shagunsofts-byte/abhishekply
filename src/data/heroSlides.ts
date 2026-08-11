@@ -77,7 +77,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     mobileImage: "https://res.cloudinary.com/dmvd2eacs/image/upload/q_auto,f_auto/v1785738255/ChatGPT_Image_Aug_3_2026_11_51_51_AM_paboii.png",
     primaryButton: "View Collection",
     secondaryButton: "Get Quote",
-    primaryLink: "/products/laminates",
+    primaryLink: "/products/veneers",
     secondaryLink: `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi, I would like to get a quote.`
   }
 ];

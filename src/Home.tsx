@@ -4,7 +4,7 @@ import { FeaturedCollection } from './components/FeaturedCollection';
 import { TabbedCategoryGallery } from './components/TabbedCategoryGallery';
 import { SeoWrapper } from './components/SeoWrapper';
 import { HeroSlider } from "./components/hero/HeroSlider";
-import { TrustSection } from './components/TrustSection';
+import { CategoryDock } from './components/category/CategoryDock';
 import { SITE_CONFIG } from './data/siteConfig';
 import { ContactCard } from './components/ContactCard';
 import React, {
@@ -12,68 +12,20 @@ import React, {
   useRef,
   useEffect
 } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
-import { 
-  Menu, X, ArrowRight, ArrowLeftRight, CheckCircle2, 
-  MapPin, Phone, Clock, ChevronDown, Play, Instagram, Facebook, Twitter,
-  ChevronLeft, ChevronRight, Eye, Sparkles, MessageCircle, Mail
-} from 'lucide-react';
-
-// --- STYLES & FONTS ---
-// Injecting premium fonts directly
-const globalStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-
-  :root {
-    --gold: #d97706; /* amber-600 */
-    --gold-light: #f59e0b; /* amber-500 */
-    --wood-dark: #3f2e23;
-  }
-
-  body {
-    background-color: #fafafa; /* zinc-50 */
-    color: #09090b; /* zinc-950 */
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: 'Playfair Display', serif;
-  }
-
-  .font-outfit {
-    font-family: 'Outfit', sans-serif;
-  }
-
-  /* Hide scrollbar for seamless cinematic feel */
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #fef3c7 0%, #d97706 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .glass-panel {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-  }
-`;
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ArrowRight, ChevronDown, Play, Instagram, Facebook, Twitter, ChevronLeft, ChevronRight, Eye, Sparkles } from 'lucide-react';
 
 // --- DATA ---
+const BRANDS = ["Greenply", "CenturyPly", "Greenlam", "Merino", "Action Tesa", "Hettich", "Godrej", "Hafele", "Ebco"];
+
 const COLLECTIONS = [
-  { title: "Premium Plywood", img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1000&auto=format&fit=crop" },
-  { title: "Luxury Laminates", img: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1000&auto=format&fit=crop" },
-  { title: "Flush Doors", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop" },
-  { title: "Hardware", img: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1000&auto=format&fit=crop" },
-  { title: "Interiors", img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop" },
+  { title: "Premium Plywood", href: "/products/plywood", img: "https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=1000&auto=format&fit=crop" },
+  { title: "Luxury Laminates", href: "/products/laminates", img: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1000&auto=format&fit=crop" },
+  { title: "Architectural Hardware", href: "/products/hardware", img: "https://images.unsplash.com/photo-1558025211-536412e87311?q=80&w=1000&auto=format&fit=crop" },
+  { title: "Smart Locks", href: "/products/hardware?type=locks", img: "https://images.unsplash.com/photo-1558025211-16315582f3fb?q=80&w=1000&auto=format&fit=crop" },
+  { title: "Modular Wardrobes", href: "/products/interiors?type=wardrobes", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1000&auto=format&fit=crop" },
 ];
 
 const FAQS = [
@@ -84,9 +36,9 @@ const FAQS = [
 
 const SHORTS_DATA = [
   { id: 1, views: "2.4K", buttonText: "Explore shade", imageUrl: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, views: "1.8K", buttonText: "View collection", imageUrl: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop" },
+  { id: 2, views: "1.8K", buttonText: "View collection", imageUrl: "https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=800&auto=format&fit=crop" },
   { id: 3, views: "3.2K", buttonText: "Shop look", imageUrl: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop" },
-  { id: 4, views: "956", buttonText: "Explore details", imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop" },
+  { id: 4, views: "956", buttonText: "Explore details", imageUrl: "https://images.unsplash.com/photo-1558025211-16315582f3fb?q=80&w=800&auto=format&fit=crop" },
   { id: 5, views: "5.1K", buttonText: "Get inspired", imageUrl: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop" },
   { id: 6, views: "4.7K", buttonText: "View catalogue", imageUrl: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" },
   { id: 7, views: "1.1K", buttonText: "Discover more", imageUrl: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop" },
@@ -94,56 +46,6 @@ const SHORTS_DATA = [
 ];
 
 // --- COMPONENTS ---
-
-const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    const handleMouseOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).tagName.toLowerCase() === 'button' || (e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('a')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseover', handleMouseOver);
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
-  }, []);
-
-  return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-amber-500 rounded-full pointer-events-none z-[100] mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
-          scale: isHovering ? 2 : 1,
-        }}
-        transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-amber-500/50 rounded-full pointer-events-none z-[99]"
-        animate={{
-          x: mousePosition.x - 24,
-          y: mousePosition.y - 24,
-          scale: isHovering ? 1.5 : 1,
-          opacity: isHovering ? 0 : 1
-        }}
-        transition={{ type: "spring", stiffness: 150, damping: 20, mass: 0.5 }}
-      />
-    </>
-  );
-};
 
 const MagneticButton = ({ children, className, onClick }: { children: React.ReactNode; className?: string; onClick?: () => void }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -174,6 +76,27 @@ const MagneticButton = ({ children, className, onClick }: { children: React.Reac
     >
       {children}
     </motion.div>
+  );
+};
+
+
+const Marquee = () => {
+  return (
+    <section id="brands" className="py-16 border-y border-zinc-200 bg-white overflow-hidden">
+      <div className="relative flex whitespace-nowrap">
+        <motion.div 
+          className="flex gap-16 items-center pr-16"
+          animate={{ x: [0, -1000] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+        >
+          {[...BRANDS, ...BRANDS].map((brand, i) => (
+            <span key={i} className="text-2xl md:text-4xl font-serif font-bold text-zinc-700 hover:text-amber-500 transition-colors duration-300 cursor-default">
+              {brand}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
@@ -209,98 +132,35 @@ const CollectionsSection = () => {
       <div className="w-full">
         <div className="flex gap-6 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory hide-scrollbar">
           {COLLECTIONS.map((col, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className={`min-w-[70vw] md:min-w-[280px] h-[360px] md:h-[400px] relative rounded-2xl overflow-hidden group snap-center cursor-pointer ${idx === 0 ? 'ml-4 md:ml-8 lg:ml-12' : ''} ${idx === COLLECTIONS.length - 1 ? 'mr-4 md:mr-8 lg:mr-12' : ''}`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10" />
-              <img loading="lazy" 
-                src={col.img} 
-                alt={col.title}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
-              <div className="absolute bottom-0 left-0 p-8 z-20 w-full transform transition-transform duration-500 group-hover:-translate-y-4">
-                <h3 className="text-2xl font-serif font-bold mb-2 text-white group-hover:text-amber-500 transition-colors">{col.title}</h3>
-                <div className="w-0 h-[2px] bg-amber-500 transition-all duration-500 group-hover:w-12 mb-4" />
-                <span className="text-sm font-outfit text-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 flex items-center gap-2">
-                  Explore Range <ChevronDown className="w-4 h-4 -rotate-90" />
-                </span>
-              </div>
-            </motion.div>
+            <Link to={col.href} key={idx}>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className={`min-w-[70vw] md:min-w-[280px] h-[360px] md:h-[400px] relative rounded-2xl overflow-hidden group snap-center cursor-pointer ${idx === 0 ? 'ml-4 md:ml-8 lg:ml-12' : ''} ${idx === COLLECTIONS.length - 1 ? 'mr-4 md:mr-8 lg:mr-12' : ''}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10" />
+                <img loading="lazy" 
+                  src={col.img} 
+                  alt={col.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute bottom-0 left-0 p-8 z-20 w-full transform transition-transform duration-500 group-hover:-translate-y-4">
+                  <h3 className="text-2xl font-serif font-bold mb-2 text-white group-hover:text-amber-500 transition-colors">{col.title}</h3>
+                  <div className="w-0 h-[2px] bg-amber-500 transition-all duration-500 group-hover:w-12 mb-4" />
+                  <span className="text-sm font-outfit text-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 flex items-center gap-2">
+                    Explore Range <ChevronDown className="w-4 h-4 -rotate-90" />
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
       <style dangerouslySetInnerHTML={{__html: `
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}} />
-    </section>
-  );
-};
-const DoorShowcase = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <section className="py-32 bg-zinc-50 overflow-hidden">
-      <div className="px-4 md:px-8 lg:px-12 w-full flex flex-col md:flex-row items-center gap-16">
-        <div className="md:w-1/2">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6">Masterpiece<br/>Doors</h2>
-            <p className="text-zinc-600 font-inter mb-8 text-lg">
-              Solid wood, flush doors, and engineered marvels. Click to experience the grand entrance.
-            </p>
-            <ul className="space-y-4 font-outfit mb-8">
-               {['Termite Resistant', 'Acoustic Insulation', 'Custom Dimensions'].map((feature, i) => (
-                 <li key={i} className="flex items-center gap-3 text-zinc-700">
-                    <CheckCircle2 className="w-5 h-5 text-amber-500" /> {feature}
-                 </li>
-               ))}
-            </ul>
-            <MagneticButton className="px-8 py-3 bg-zinc-900 text-white font-outfit font-medium rounded-full hover:bg-zinc-200 transition-colors">
-              View Door Catalog
-            </MagneticButton>
-          </motion.div>
-        </div>
-
-        <div className="md:w-1/2 w-full h-[600px] flex justify-center items-center perspective-[1500px]">
-           <div className="relative w-[280px] h-[550px] shadow-2xl transform-style-3d">
-              <div className="absolute inset-0 bg-gradient-to-br from-zinc-200 to-zinc-300 rounded-lg overflow-hidden">
-                 <img loading="lazy" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover opacity-60" alt="Room interior" />
-              </div>
-              
-              <motion.div 
-                className="absolute inset-0 bg-amber-900 origin-left border border-zinc-700/50 shadow-[-10px_0_30px_rgba(0,0,0,0.8)] cursor-pointer"
-                style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=800&auto=format&fit=crop)',
-                  backgroundSize: 'cover',
-                  backgroundBlendMode: 'multiply'
-                }}
-                animate={{ rotateY: isOpen ? -85 : 0 }}
-                transition={{ type: "spring", stiffness: 40, damping: 15 }}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <div className="absolute top-1/2 right-4 w-2 h-16 bg-zinc-300 rounded-sm shadow-md" />
-                <div className="absolute top-1/2 right-3 w-4 h-4 bg-zinc-400 rounded-full -mt-6 shadow-md" />
-              </motion.div>
-              
-              <div className={`absolute -bottom-12 w-full text-center font-outfit text-amber-500 text-sm tracking-widest uppercase transition-opacity ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
-                Click to Open
-              </div>
-           </div>
-        </div>
-      </div>
-      <style dangerouslySetInnerHTML={{__html: `
-        .perspective-\\[1500px\\] { perspective: 1500px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .origin-left { transform-origin: left center; }
       `}} />
     </section>
   );
@@ -352,7 +212,37 @@ const Timeline = () => {
   );
 };
 
+const Stats = () => {
+  const stats = [
+    { num: 25, label: "Years of Trust", suffix: "+" },
+    { num: 5000, label: "Projects Completed", suffix: "+" },
+    { num: 10, label: "Premium Brands", suffix: "+" },
+    { num: 100, label: "Satisfaction", suffix: "%" }
+  ];
 
+  return (
+    <section className="py-24 bg-amber-500 text-zinc-950">
+      <div className="px-4 md:px-8 lg:px-12 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="flex flex-col items-center">
+               <motion.div 
+                 initial={{ scale: 0.5, opacity: 0 }}
+                 whileInView={{ scale: 1, opacity: 1 }}
+                 viewport={{ once: true }}
+                 transition={{ type: "spring", delay: idx * 0.1 }}
+                 className="text-5xl md:text-7xl font-serif font-bold mb-2 tracking-tighter"
+               >
+                 {stat.num}{stat.suffix}
+               </motion.div>
+               <span className="font-outfit font-semibold uppercase tracking-widest text-sm opacity-80">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const FAQ = () => {
   const [openIdx, setOpenIdx] = useState(0);
@@ -602,54 +492,21 @@ export const Footer = () => {
           <div>
             <h4 className="font-outfit font-semibold tracking-widest uppercase text-sm mb-6 text-zinc-900">Explore</h4>
             <ul className="space-y-3 text-zinc-600 font-inter text-sm">
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Premium Plywood</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Decorative Laminates</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Modular Kitchens</Link></li>
-              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Architectural Hardware</Link></li>
+              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/plywood">Premium Plywood</Link></li>
+              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/laminates">Decorative Laminates</Link></li>
+              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/interiors?type=kitchen">Modular Kitchens</Link></li>
+              <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products/hardware">Architectural Hardware</Link></li>
               <li className="hover:text-amber-500 cursor-pointer transition-colors"><Link to="/products">Our Brands</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-outfit font-semibold tracking-widest uppercase text-sm mb-6 text-zinc-900">Contact Us</h4>
-            <ul className="space-y-3 text-zinc-600 font-inter text-sm">
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <a href={`tel:+91${SITE_CONFIG.primaryPhone}`} className="hover:text-amber-500 transition-colors">+91 {SITE_CONFIG.primaryPhone}</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <a href={`tel:+91${SITE_CONFIG.contactNumbers[1] || '9839352502'}`} className="hover:text-amber-500 transition-colors">+91 {SITE_CONFIG.contactNumbers[1] || '9839352502'}</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <MessageCircle className="w-4 h-4 text-green-500 shrink-0" />
-                <a href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`} target="_blank" rel="noreferrer" className="hover:text-amber-500 transition-colors">WhatsApp Chat</a>
-              </li>
-            </ul>
+          <div className="lg:col-span-2">
+            <ContactCard />
           </div>
-
-          <div>
-            <h4 className="font-outfit font-semibold tracking-widest uppercase text-sm mb-6 text-zinc-900">Visit Showroom</h4>
-            <div className="space-y-3 text-zinc-600 font-inter text-sm">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-1" />
-                <span className="leading-relaxed">{SITE_CONFIG.addressEnglish}</span>
-              </div>
-              <div className="flex items-start gap-3 pt-1">
-                <Clock className="w-4 h-4 text-amber-500 shrink-0 mt-1" />
-                <div>
-                  <p><span className="font-medium text-zinc-800">{SITE_CONFIG.businessHours.weekdays}</span>: {SITE_CONFIG.businessHours.weekdayHours}</p>
-                  <p><span className="font-medium text-zinc-800">{SITE_CONFIG.businessHours.weekend}</span>: {SITE_CONFIG.businessHours.weekendHours}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
         <div className="pt-8 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500 font-inter">
           <p>&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</p>
-          <p>By <a href="https://shreejiinfosys.com" target="_blank" rel="noopener noreferrer" className="hover:text-amber-500 transition-colors font-medium">Shreeji Infosys</a></p>
           <div className="flex gap-6">
             <span className="hover:text-zinc-700 cursor-pointer transition-colors">Privacy Policy</span>
             <span className="hover:text-zinc-700 cursor-pointer transition-colors">Terms of Service</span>
@@ -662,37 +519,7 @@ export const Footer = () => {
 // --- MAIN APP ---
 export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimationPlayed }: { hasBootAnimationPlayed?: boolean, setHasBootAnimationPlayed?: (val: boolean) => void }) {
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HardwareStore",
-    name: SITE_CONFIG.businessName,
-    "image": "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200&auto=format&fit=crop",
-    "@id": "https://www.abhishekplyandhardware.com",
-    "url": "https://www.abhishekplyandhardware.com",
-    telephone: `+91${SITE_CONFIG.primaryPhone}`,
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Banjari Mod, Lucknow Road",
-      "addressLocality": "Bahraich",
-      "addressRegion": "UP",
-      "postalCode": "271801",
-      "addressCountry": "IN"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "09:00",
-      "closes": "20:00"
-    }
-  };
+  
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
     return () => {
@@ -738,7 +565,6 @@ export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimati
             }
           `}
         </script>
-      <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
       <main className="relative w-full min-h-screen overflow-x-hidden bg-zinc-50 text-zinc-950 selection:bg-amber-500/30 selection:text-zinc-900">
         <DoorTransition hasPlayed={hasBootAnimationPlayed} onComplete={() => setHasBootAnimationPlayed?.(true)}>
           <motion.div
@@ -747,13 +573,23 @@ export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimati
             transition={{ duration: 1 }}
           >
             <HeroSlider />
+            <section className="relative bg-zinc-950 py-10 md:py-12 overflow-hidden">
+              <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.15),transparent_60%)]" />
+              <p className="relative z-10 text-center text-xs font-outfit uppercase tracking-[0.2em] text-zinc-400 mb-6">
+                Quick Browse
+              </p>
+              <div className="relative h-16">
+                <CategoryDock />
+              </div>
+            </section>
             <TabbedCategoryGallery />
             
+            <Marquee />
             <CollectionsSection />
             <BeforeAfterSection />
             <FeaturedCollection />
             <Timeline />
-            <TrustSection />
+            <Stats />
             <FAQ />
             <VideoShortsCarousel />
           </motion.div>
