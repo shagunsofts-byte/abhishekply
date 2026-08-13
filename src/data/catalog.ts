@@ -79,7 +79,8 @@ export const PRODUCTS: Product[] = [
     priceLabel: 'Best Price Available',
     images: [
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=900&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595428773960-e33e37fcc36e?q=80&w=900&auto=format&fit=crop'
     ],
     thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=700&auto=format&fit=crop',
     sizes: ['6mm', '9mm', '12mm', '18mm', '19mm', '25mm'],
@@ -117,7 +118,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'BWR plywood for everyday interior furniture.',
     price: null,
     priceLabel: 'Enquire for Price',
-    images: ['https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595428773960-e33e37fcc36e?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=700&auto=format&fit=crop',
     sizes: ['6mm', '9mm', '12mm', '18mm', '19mm'],
     finish: 'Raw',
@@ -207,7 +211,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Marine-grade plywood for permanent water exposure.',
     price: null,
     priceLabel: 'Best Price Available',
-    images: ['https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=700&auto=format&fit=crop',
     sizes: ['12mm', '18mm', '19mm', '25mm'],
     finish: 'Raw',
@@ -268,7 +275,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Mirror-finish laminate for modern shutters and units.',
     price: null,
     priceLabel: 'Enquire for Price',
-    images: ['https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=700&auto=format&fit=crop',
     sizes: ['8x4 ft', '1mm', '1.25mm'],
     colors: ['Pearl White', 'Jet Black', 'Wine Red', 'Ocean Blue'],
@@ -359,7 +369,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Realistic wood-look laminate at a fraction of the cost.',
     price: null,
     priceLabel: 'Best Price Available',
-    images: ['https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=700&auto=format&fit=crop',
     sizes: ['8x4 ft'],
     colors: ['Natural Oak', 'Walnut', 'Teak', 'Rosewood'],
@@ -451,7 +464,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Genuine teak veneer with rich natural grain.',
     price: null,
     priceLabel: 'Best Price Available',
-    images: ['https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595526114101-97d812ce3c96?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=700&auto=format&fit=crop',
     sizes: ['8x4 ft sheets'],
     finish: 'Natural / Polished',
@@ -571,7 +587,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'BWP grade flush door with teak veneer.',
     price: null,
     priceLabel: 'Enquire for Price',
-    images: ['https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1558025211-536412e87311?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=700&auto=format&fit=crop',
     sizes: ['8x3 ft', '8x4 ft', 'Custom'],
     colors: ['Natural Teak'],
@@ -725,7 +744,8 @@ export const PRODUCTS: Product[] = [
     priceLabel: 'Best Price Available',
     images: [
       'https://images.unsplash.com/photo-1558211583-05bdfa91b29c?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1558211583-05bdfa91b29c?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=800&auto=format&fit=crop'
     ],
     thumbnail: 'https://images.unsplash.com/photo-1558211583-05bdfa91b29c?q=80&w=600&auto=format&fit=crop',
     sizes: ['8 inch', '10 inch', '12 inch'],
@@ -759,7 +779,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Advanced mortise lock with computerized keys.',
     price: null,
     priceLabel: 'Enquire for Price',
-    images: ['https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=800&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1558622468-e6a0f1e15c92?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=600&auto=format&fit=crop',
     sizes: ['Standard'],
     colors: ['Satin Nickel', 'Chrome'],
@@ -791,7 +814,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Keyless smart lock with app-based access.',
     price: null,
     priceLabel: 'Enquire for Price',
-    images: ['https://images.unsplash.com/photo-1558622468-e6a0f1e15c92?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1558622468-e6a0f1e15c92?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1558622468-e6a0f1e15c92?q=80&w=700&auto=format&fit=crop',
     colors: ['Matte Black', 'Silver'],
     finish: 'Matte',
@@ -821,7 +847,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Silent soft-close cabinet hinges.',
     price: null,
     priceLabel: 'Best Price Available',
-    images: ['https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=700&auto=format&fit=crop',
     colors: ['Nickel Plated'],
     finish: 'Nickel Plated',
@@ -851,7 +880,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Soft-close modular kitchen tandem box.',
     price: null,
     priceLabel: 'Best Price Available',
-    images: ['https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=800&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=600&auto=format&fit=crop',
     sizes: ['4 inch', '6 inch', '8 inch'],
     colors: ['Silver', 'Anthracite'],
@@ -940,7 +972,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Modular wardrobe interior solution.',
     price: null,
     priceLabel: 'Enquire Now',
-    images: ['https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=800&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=600&auto=format&fit=crop',
     sizes: ['Custom Built'],
     colors: ['Mocha', 'White', 'Anthracite'],
@@ -971,7 +1006,10 @@ export const PRODUCTS: Product[] = [
     shortDescription: 'Complete L-shaped modular kitchen, designed and installed.',
     price: null,
     priceLabel: 'Get a Custom Quote',
-    images: ['https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=900&auto=format&fit=crop'],
+    images: [
+      'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=900&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=900&auto=format&fit=crop'
+    ],
     thumbnail: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=700&auto=format&fit=crop',
     finish: 'High Gloss / Matte Shutters',
     material: 'BWP Plywood carcass with laminate shutters',

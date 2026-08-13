@@ -8,11 +8,13 @@ import { ProductCard } from '../components/ProductCard';
 import { SeoWrapper } from '../components/SeoWrapper';
 import { SITE_CONFIG } from '../data/siteConfig';
 import { useQuote } from '../context/QuoteContext';
+import { ImageLightbox } from '../components/ImageLightbox';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = PRODUCTS.find((p) => p.slug === slug);
   const [activeImage, setActiveImage] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const { addToQuote, isInQuote } = useQuote();
 
   if (!product) {
@@ -56,20 +58,30 @@ export default function ProductDetailPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16">
             {/* Gallery */}
-            <div>
+            <div className="max-w-[460px] mx-auto lg:mx-0 w-full">
               <motion.div
                 key={activeImage}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
-                className="relative aspect-square rounded-3xl overflow-hidden bg-zinc-100 mb-4"
+                onClick={() => setLightboxOpen(true)}
+                className="group relative aspect-square rounded-3xl overflow-hidden bg-zinc-100 mb-4 p-6 md:p-8 cursor-zoom-in border border-zinc-100"
               >
-                <img src={images[activeImage]} alt={product.name} className="w-full h-full object-cover" />
+                <div className="relative w-full h-full overflow-hidden rounded-xl">
+                  <img
+                    src={images[activeImage]}
+                    alt={product.name}
+                    className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+                </div>
                 {product.isNew && (
                   <span className="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-outfit font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
                     New
                   </span>
                 )}
+                <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-zinc-700 text-[11px] font-outfit font-medium px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  Click to zoom
+                </span>
               </motion.div>
               {images.length > 1 && (
                 <div className="flex gap-3">
@@ -77,16 +89,26 @@ export default function ProductDetailPage() {
                     <button
                       key={idx}
                       onClick={() => setActiveImage(idx)}
-                      className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-colors shrink-0 ${
+                      className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-colors shrink-0 bg-zinc-50 ${
                         activeImage === idx ? 'border-amber-500' : 'border-transparent opacity-70 hover:opacity-100'
                       }`}
                     >
-                      <img src={img} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-contain p-1" />
                     </button>
                   ))}
                 </div>
               )}
             </div>
+
+            {lightboxOpen && (
+              <ImageLightbox
+                images={images}
+                activeIndex={activeImage}
+                alt={product.name}
+                onClose={() => setLightboxOpen(false)}
+                onNavigate={setActiveImage}
+              />
+            )}
 
             {/* Info */}
             <div className="flex flex-col">

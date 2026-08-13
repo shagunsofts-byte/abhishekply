@@ -5,7 +5,6 @@ import { TabbedCategoryGallery } from './components/TabbedCategoryGallery';
 import { SeoWrapper } from './components/SeoWrapper';
 import { HeroSlider } from "./components/hero/HeroSlider";
 import { SITE_CONFIG } from './data/siteConfig';
-import { ContactCard } from './components/ContactCard';
 import React, {
   useState,
   useRef,
@@ -468,39 +467,37 @@ const VideoShortsCarousel = () => {
   );
 };
 
-// --- CONTACT / VISIT SECTION ---
-const ContactSection = () => {
-  return (
-    <section id="contact-section" className="bg-white py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-        <div className="text-center mb-14">
-          <span className="text-xs font-outfit uppercase tracking-[0.2em] text-amber-600 font-semibold">Get In Touch</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-zinc-900 mt-3">Visit Our Showroom</h2>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          <ContactCard />
-          <div className="rounded-3xl overflow-hidden border border-zinc-200 shadow-xl shadow-zinc-200/50 min-h-[360px]">
-            <iframe
-              title="Abhishek Ply & Hardware Location"
-              src={SITE_CONFIG.googleMapsUrl}
-              className="w-full h-full min-h-[360px]"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 export const Footer = () => {
   return (
-    <footer id="contact" className="bg-zinc-950 text-zinc-400 pt-20 pb-8 relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
+    <footer id="contact" className="bg-zinc-950 text-zinc-400 relative overflow-hidden">
+      {/* Full-bleed map banner */}
+      <div className="relative w-full h-[320px] md:h-[400px] border-b border-zinc-800">
+        <iframe
+          title="Abhishek Ply & Hardware Location"
+          src={SITE_CONFIG.googleMapsUrl}
+          className="w-full h-full grayscale-[35%] contrast-[1.05] opacity-90"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/10 to-transparent pointer-events-none" />
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 md:left-6 md:translate-x-0 bg-zinc-950/90 backdrop-blur border border-zinc-800 rounded-2xl px-5 py-3.5 flex items-center gap-3 max-w-[92vw]">
+          <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 animate-pulse" />
+          <p className="text-xs md:text-sm font-inter text-zinc-200 truncate">{SITE_CONFIG.addressEnglish}</p>
+          <a
+            href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs font-outfit font-semibold text-amber-500 hover:text-amber-400 whitespace-nowrap shrink-0 transition-colors"
+          >
+            Get Directions
+          </a>
+        </div>
+      </div>
 
-      <div className="px-4 md:px-8 lg:px-12 max-w-7xl mx-auto w-full relative z-10">
+      <div className="absolute top-[320px] md:top-[400px] left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
+
+      <div className="w-full px-6 md:px-12 lg:px-20 pt-16 relative z-10">
         {/* Top: brand + CTA */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-zinc-800">
           <div className="max-w-md">
@@ -547,22 +544,34 @@ export const Footer = () => {
             </ul>
           </div>
           <div className="col-span-2 md:col-span-2">
-            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Visit the Showroom</h4>
-            <p className="leading-relaxed mb-3">{SITE_CONFIG.addressEnglish}</p>
-            <p className="text-xs text-zinc-500">
-              {SITE_CONFIG.businessHours.weekdays}: {SITE_CONFIG.businessHours.weekdayHours} · {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Business Hours</h4>
+            <p className="leading-relaxed">
+              {SITE_CONFIG.businessHours.weekdays}: {SITE_CONFIG.businessHours.weekdayHours}
+            </p>
+            <p className="leading-relaxed text-zinc-500">
+              {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
             </p>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-6 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-          <p>&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href="#" aria-label="Instagram" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Instagram className="w-3.5 h-3.5"/></a>
-            <a href="#" aria-label="Facebook" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Facebook className="w-3.5 h-3.5"/></a>
-            <a href="#" aria-label="Twitter" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Twitter className="w-3.5 h-3.5"/></a>
+        {/* Bottom bar — dual branding, full width */}
+        <div className="pt-6 pb-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-5 text-xs">
+          <div className="flex items-center gap-4 order-2 md:order-1">
+            <span className="text-zinc-500">&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</span>
+            <div className="hidden sm:flex items-center gap-3">
+              <a href="#" aria-label="Instagram" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Instagram className="w-3.5 h-3.5"/></a>
+              <a href="#" aria-label="Facebook" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Facebook className="w-3.5 h-3.5"/></a>
+              <a href="#" aria-label="Twitter" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Twitter className="w-3.5 h-3.5"/></a>
+            </div>
           </div>
+          <a
+            href="https://shreejiinfosys.com"
+            target="_blank"
+            rel="noreferrer"
+            className="order-1 md:order-2 text-zinc-500 hover:text-amber-500 transition-colors font-inter"
+          >
+            Designed &amp; Built by <span className="font-outfit font-semibold text-zinc-300 group-hover:text-amber-500">Shreeji Infosys</span>
+          </a>
         </div>
       </div>
     </footer>
@@ -635,7 +644,6 @@ export default function Home({ hasBootAnimationPlayed = false, setHasBootAnimati
             <Stats />
             <FAQ />
             <VideoShortsCarousel />
-            <ContactSection />
           </motion.div>
         </DoorTransition>
       </main>
