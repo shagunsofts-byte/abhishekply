@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: abhishek-ply-hardware
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      # Client-side routing (React Router) fix: without this, refreshing or
+      # directly opening any URL other than "/" (e.g. /products/plywood)
+      # returns a 404, because there's no real file at that path on the
+      # server — only index.html knows how to render it via JS routing.
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN

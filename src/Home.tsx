@@ -10,7 +10,7 @@ import React, {
   useRef,
   useEffect
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, ChevronDown, Play, Instagram, Facebook, Twitter, ChevronLeft, ChevronRight, Eye, Sparkles } from 'lucide-react';
@@ -468,36 +468,14 @@ const VideoShortsCarousel = () => {
 };
 
 export const Footer = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
-    <footer id="contact" className="bg-zinc-950 text-zinc-400 relative overflow-hidden">
-      {/* Full-bleed map banner */}
-      <div className="relative w-full h-[320px] md:h-[400px] border-b border-zinc-800">
-        <iframe
-          title="Abhishek Ply & Hardware Location"
-          src={SITE_CONFIG.googleMapsUrl}
-          className="w-full h-full grayscale-[35%] contrast-[1.05] opacity-90"
-          style={{ border: 0 }}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/10 to-transparent pointer-events-none" />
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 md:left-6 md:translate-x-0 bg-zinc-950/90 backdrop-blur border border-zinc-800 rounded-2xl px-5 py-3.5 flex items-center gap-3 max-w-[92vw]">
-          <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0 animate-pulse" />
-          <p className="text-xs md:text-sm font-inter text-zinc-200 truncate">{SITE_CONFIG.addressEnglish}</p>
-          <a
-            href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs font-outfit font-semibold text-amber-500 hover:text-amber-400 whitespace-nowrap shrink-0 transition-colors"
-          >
-            Get Directions
-          </a>
-        </div>
-      </div>
+    <footer id="contact" className="bg-zinc-950 text-zinc-400 pt-16 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
 
-      <div className="absolute top-[320px] md:top-[400px] left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
-
-      <div className="w-full px-6 md:px-12 lg:px-20 pt-16 relative z-10">
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         {/* Top: brand + CTA */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-zinc-800">
           <div className="max-w-md">
@@ -555,7 +533,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom bar — dual branding, full width */}
-        <div className="pt-6 pb-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-5 text-xs">
+        <div className="pt-6 pb-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-xs">
           <div className="flex items-center gap-4 order-2 md:order-1">
             <span className="text-zinc-500">&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</span>
             <div className="hidden sm:flex items-center gap-3">
@@ -564,14 +542,38 @@ export const Footer = () => {
               <a href="#" aria-label="Twitter" className="w-8 h-8 rounded-full border border-zinc-800 flex items-center justify-center hover:border-amber-500 hover:text-amber-500 transition-colors"><Twitter className="w-3.5 h-3.5"/></a>
             </div>
           </div>
-          <a
-            href="https://shreejiinfosys.com"
-            target="_blank"
-            rel="noreferrer"
-            className="order-1 md:order-2 text-zinc-500 hover:text-amber-500 transition-colors font-inter"
-          >
-            Designed &amp; Built by <span className="font-outfit font-semibold text-zinc-300 group-hover:text-amber-500">Shreeji Infosys</span>
-          </a>
+
+          <div className="order-1 md:order-2 flex flex-col items-center md:items-end gap-3">
+            {isHome && (
+              <a
+                href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative w-full max-w-[220px] md:w-[220px] h-[110px] rounded-xl overflow-hidden border border-zinc-800 hover:border-amber-500/50 transition-colors"
+              >
+                <iframe
+                  title="Abhishek Ply & Hardware Location"
+                  src={SITE_CONFIG.googleMapsUrl}
+                  className="w-full h-full grayscale-[45%] contrast-[1.05] opacity-80 pointer-events-none"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="absolute inset-0 bg-zinc-950/10 group-hover:bg-zinc-950/0 transition-colors" />
+                <span className="absolute bottom-1.5 right-1.5 bg-zinc-950/90 backdrop-blur text-amber-500 text-[10px] font-outfit font-semibold px-2 py-1 rounded-md flex items-center gap-1">
+                  Get Directions
+                </span>
+              </a>
+            )}
+            <a
+              href="https://shreejiinfosys.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-zinc-500 hover:text-amber-500 transition-colors font-inter"
+            >
+              Designed &amp; Built by <span className="font-outfit font-semibold text-zinc-300">Shreeji Infosys</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
