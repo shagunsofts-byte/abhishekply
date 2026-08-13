@@ -502,38 +502,75 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Middle: links + contact, single compact row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 text-sm font-inter">
-          <div>
-            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Shop</h4>
-            <ul className="space-y-2.5">
-              <li><Link to="/products/plywood" className="hover:text-amber-500 transition-colors">Plywood</Link></li>
-              <li><Link to="/products/laminates" className="hover:text-amber-500 transition-colors">Laminates</Link></li>
-              <li><Link to="/products/hardware" className="hover:text-amber-500 transition-colors">Hardware</Link></li>
-              <li><Link to="/products" className="hover:text-amber-500 transition-colors">All Products</Link></li>
-            </ul>
+        {/* Middle: links + business hours + map (map only on homepage) */}
+        <div className={`grid grid-cols-1 ${isHome ? 'lg:grid-cols-5' : 'lg:grid-cols-3'} gap-10 lg:gap-14 py-14 text-sm font-inter`}>
+          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-8 ${isHome ? 'lg:col-span-3' : 'lg:col-span-2'}`}>
+            <div>
+              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Shop</h4>
+              <ul className="space-y-2.5">
+                <li><Link to="/products/plywood" className="hover:text-amber-500 transition-colors">Plywood</Link></li>
+                <li><Link to="/products/laminates" className="hover:text-amber-500 transition-colors">Laminates</Link></li>
+                <li><Link to="/products/hardware" className="hover:text-amber-500 transition-colors">Hardware</Link></li>
+                <li><Link to="/products" className="hover:text-amber-500 transition-colors">All Products</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Company</h4>
+              <ul className="space-y-2.5">
+                <li><Link to="/products/interiors?type=kitchen" className="hover:text-amber-500 transition-colors">Modular Kitchens</Link></li>
+                <li><a href="#faq" className="hover:text-amber-500 transition-colors">FAQs</a></li>
+                <li><Link to="/" className="hover:text-amber-500 transition-colors">Home</Link></li>
+              </ul>
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Business Hours</h4>
+              <p className="leading-relaxed">
+                {SITE_CONFIG.businessHours.weekdays}
+              </p>
+              <p className="leading-relaxed mb-3">
+                {SITE_CONFIG.businessHours.weekdayHours}
+              </p>
+              <p className="leading-relaxed text-zinc-500">
+                {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
+              </p>
+            </div>
           </div>
-          <div>
-            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Company</h4>
-            <ul className="space-y-2.5">
-              <li><Link to="/products/interiors?type=kitchen" className="hover:text-amber-500 transition-colors">Modular Kitchens</Link></li>
-              <li><a href="#faq" className="hover:text-amber-500 transition-colors">FAQs</a></li>
-              <li><Link to="/" className="hover:text-amber-500 transition-colors">Home</Link></li>
-            </ul>
-          </div>
-          <div className="col-span-2 md:col-span-2">
-            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Business Hours</h4>
-            <p className="leading-relaxed">
-              {SITE_CONFIG.businessHours.weekdays}: {SITE_CONFIG.businessHours.weekdayHours}
-            </p>
-            <p className="leading-relaxed text-zinc-500">
-              {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
-            </p>
-          </div>
+
+          {isHome && (
+            <div className="lg:col-span-2">
+              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Visit Us</h4>
+              <a
+                href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative block w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden border border-zinc-800 hover:border-amber-500/40 transition-colors"
+              >
+                <iframe
+                  title="Abhishek Ply & Hardware Location"
+                  src={SITE_CONFIG.googleMapsUrl}
+                  className="w-full h-full grayscale-[45%] contrast-[1.05] opacity-85 pointer-events-none group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/10 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="text-xs font-inter text-zinc-300 leading-relaxed line-clamp-2">
+                      {SITE_CONFIG.addressEnglish.split('\n').join(', ')}
+                    </p>
+                  </div>
+                  <span className="shrink-0 bg-amber-500 group-hover:bg-amber-400 text-zinc-950 text-xs font-outfit font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap">
+                    Get Directions
+                  </span>
+                </div>
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Bottom bar — dual branding, full width */}
-        <div className="pt-6 pb-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center md:items-end gap-6 text-xs">
+        <div className="pt-6 pb-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-5 text-xs">
           <div className="flex items-center gap-4 order-2 md:order-1">
             <span className="text-zinc-500">&copy; {new Date().getFullYear()} Abhishek Ply & Hardware. All Rights Reserved.</span>
             <div className="hidden sm:flex items-center gap-3">
@@ -543,37 +580,14 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="order-1 md:order-2 flex flex-col items-center md:items-end gap-3">
-            {isHome && (
-              <a
-                href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative w-full max-w-[220px] md:w-[220px] h-[110px] rounded-xl overflow-hidden border border-zinc-800 hover:border-amber-500/50 transition-colors"
-              >
-                <iframe
-                  title="Abhishek Ply & Hardware Location"
-                  src={SITE_CONFIG.googleMapsUrl}
-                  className="w-full h-full grayscale-[45%] contrast-[1.05] opacity-80 pointer-events-none"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-                <div className="absolute inset-0 bg-zinc-950/10 group-hover:bg-zinc-950/0 transition-colors" />
-                <span className="absolute bottom-1.5 right-1.5 bg-zinc-950/90 backdrop-blur text-amber-500 text-[10px] font-outfit font-semibold px-2 py-1 rounded-md flex items-center gap-1">
-                  Get Directions
-                </span>
-              </a>
-            )}
-            <a
-              href="https://shreejiinfosys.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-zinc-500 hover:text-amber-500 transition-colors font-inter"
-            >
-              Designed &amp; Built by <span className="font-outfit font-semibold text-zinc-300">Shreeji Infosys</span>
-            </a>
-          </div>
+          <a
+            href="https://shreejiinfosys.com"
+            target="_blank"
+            rel="noreferrer"
+            className="order-1 md:order-2 text-zinc-500 hover:text-amber-500 transition-colors font-inter"
+          >
+            Designed &amp; Built by <span className="font-outfit font-semibold text-zinc-300">Shreeji Infosys</span>
+          </a>
         </div>
       </div>
     </footer>

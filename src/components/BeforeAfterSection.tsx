@@ -148,8 +148,8 @@ export const BeforeAfterSection = () => {
 
             {/* Divider Line */}
             <motion.div 
-              className="absolute top-0 bottom-0 w-[1px] md:w-[2px] bg-gradient-to-b from-transparent via-amber-400 to-transparent shadow-[0_0_10px_rgba(251,191,36,0.6)] z-20 pointer-events-none"
-              style={{ x: useTransform(springX, (val) => `calc(${val}% - 1px)`) }}
+              className="absolute top-0 bottom-0 w-[1px] md:w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-amber-400 to-transparent shadow-[0_0_10px_rgba(251,191,36,0.6)] z-20 pointer-events-none"
+              style={{ left: useTransform(springX, (val) => `${val}%`) }}
             >
               {/* Handle */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border-2 border-amber-400 flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-all duration-300 pointer-events-auto cursor-grab active:cursor-grabbing">
