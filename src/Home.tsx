@@ -476,68 +476,49 @@ export const Footer = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-24 bg-amber-500/10 blur-[100px] pointer-events-none" />
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
-        {/* Top: brand + CTA */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-zinc-800">
-          <div className="max-w-md">
-            <span className="font-serif text-2xl font-bold text-white tracking-wide block mb-3">ABHISHEK</span>
-            <p className="text-sm font-inter leading-relaxed">
+        {/* Middle: brand + links + business hours + map (map only on homepage) */}
+        <div className={`grid grid-cols-1 ${isHome ? 'lg:grid-cols-12' : 'lg:grid-cols-9'} gap-10 lg:gap-8 pt-2 pb-14 text-sm font-inter`}>
+          <div className="lg:col-span-3">
+            <span className="font-serif text-xl font-bold text-white tracking-wide block mb-3">Abhishek Ply & Hardware</span>
+            <p className="text-zinc-500 text-xs leading-relaxed max-w-[220px]">
               Premium plywood, laminates, veneers and architectural hardware — trusted in Bahraich since 1995.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-white text-zinc-900 px-6 py-3 rounded-full font-outfit font-medium text-sm hover:bg-amber-500 transition-colors text-center"
-            >
-              Chat on WhatsApp
-            </a>
-            <a
-              href={`tel:+91${SITE_CONFIG.primaryPhone}`}
-              className="border border-zinc-700 text-white px-6 py-3 rounded-full font-outfit font-medium text-sm hover:border-amber-500 hover:text-amber-500 transition-colors text-center"
-            >
-              +91 {SITE_CONFIG.primaryPhone}
-            </a>
-          </div>
-        </div>
 
-        {/* Middle: links + business hours + map (map only on homepage) */}
-        <div className={`grid grid-cols-1 ${isHome ? 'lg:grid-cols-5' : 'lg:grid-cols-3'} gap-10 lg:gap-14 py-14 text-sm font-inter`}>
-          <div className={`grid grid-cols-2 sm:grid-cols-3 gap-8 ${isHome ? 'lg:col-span-3' : 'lg:col-span-2'}`}>
-            <div>
-              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Shop</h4>
-              <ul className="space-y-2.5">
-                <li><Link to="/products/plywood" className="hover:text-amber-500 transition-colors">Plywood</Link></li>
-                <li><Link to="/products/laminates" className="hover:text-amber-500 transition-colors">Laminates</Link></li>
-                <li><Link to="/products/hardware" className="hover:text-amber-500 transition-colors">Hardware</Link></li>
-                <li><Link to="/products" className="hover:text-amber-500 transition-colors">All Products</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Company</h4>
-              <ul className="space-y-2.5">
-                <li><Link to="/products/interiors?type=kitchen" className="hover:text-amber-500 transition-colors">Modular Kitchens</Link></li>
-                <li><a href="#faq" className="hover:text-amber-500 transition-colors">FAQs</a></li>
-                <li><Link to="/" className="hover:text-amber-500 transition-colors">Home</Link></li>
-              </ul>
-            </div>
-            <div className="col-span-2 sm:col-span-1">
-              <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Business Hours</h4>
-              <p className="leading-relaxed">
-                {SITE_CONFIG.businessHours.weekdays}
-              </p>
-              <p className="leading-relaxed mb-3">
-                {SITE_CONFIG.businessHours.weekdayHours}
-              </p>
-              <p className="leading-relaxed text-zinc-500">
-                {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
-              </p>
-            </div>
+          <div className="lg:col-span-2">
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Shop</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/products/plywood" className="hover:text-amber-500 transition-colors">Plywood</Link></li>
+              <li><Link to="/products/laminates" className="hover:text-amber-500 transition-colors">Laminates</Link></li>
+              <li><Link to="/products/hardware" className="hover:text-amber-500 transition-colors">Hardware</Link></li>
+              <li><Link to="/products" className="hover:text-amber-500 transition-colors">All Products</Link></li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Company</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/products/interiors?type=kitchen" className="hover:text-amber-500 transition-colors">Modular Kitchens</Link></li>
+              <li><a href="#faq" className="hover:text-amber-500 transition-colors">FAQs</a></li>
+              <li><Link to="/" className="hover:text-amber-500 transition-colors">Home</Link></li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Business Hours</h4>
+            <p className="leading-relaxed">
+              {SITE_CONFIG.businessHours.weekdays}
+            </p>
+            <p className="leading-relaxed mb-3">
+              {SITE_CONFIG.businessHours.weekdayHours}
+            </p>
+            <p className="leading-relaxed text-zinc-500">
+              {SITE_CONFIG.businessHours.weekend}: {SITE_CONFIG.businessHours.weekendHours}
+            </p>
           </div>
 
           {isHome && (
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-500 mb-4">Visit Us</h4>
               <a
                 href={SITE_CONFIG.googleMapsUrl.replace('&output=embed', '')}
