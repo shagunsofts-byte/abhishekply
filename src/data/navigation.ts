@@ -1,264 +1,252 @@
 export type MegaMenuCategory = {
   id: string;
   title: string;
-  subItems: { label: string; href: string }[];
   hoverImage: string;
+  subItems: { label: string; href: string }[];
 };
 
 export type MenuItem = {
   title: string;
-  href: string;
   type: 'link' | 'mega';
+  href?: string;
   columns?: MegaMenuCategory[];
 };
 
 export const NAVIGATION_DATA: MenuItem[] = [
+  { title: 'Home', type: 'link', href: '/' },
   {
-    title: "Home",
-    href: "/",
-    type: "link"
-  },
-  {
-    title: "Products",
-    href: "/products",
-    type: "mega",
+    title: 'Products',
+    type: 'mega',
     columns: [
       {
         id: 'plywood',
         title: 'Plywood',
+        hoverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'BWP Grade Plywood', href: '/products/plywood?type=bwp' },
-          { label: 'BWR Grade Plywood', href: '/products/plywood?type=bwr' },
-          { label: 'MR Grade Plywood', href: '/products/plywood?type=mr' },
+          { label: 'BWP Grade', href: '/products/plywood?type=bwp' },
+          { label: 'BWR Grade', href: '/products/plywood?type=bwr' },
+          { label: 'MR Grade', href: '/products/plywood?type=mr' },
           { label: 'Fire Retardant', href: '/products/plywood?type=fr' },
+          { label: 'Marine Plywood', href: '/products/plywood?type=marine' },
           { label: 'Calibrated Plywood', href: '/products/plywood?type=calibrated' },
-          { label: 'Marine Plywood', href: '/products/plywood?type=marine' }
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'laminates',
         title: 'Laminates',
+        hoverImage: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200&auto=format&fit=crop',
         subItems: [
           { label: 'High Gloss', href: '/products/laminates?type=high-gloss' },
           { label: 'Suede Finish', href: '/products/laminates?type=suede' },
           { label: 'Textured', href: '/products/laminates?type=textured' },
           { label: 'Woodgrains', href: '/products/laminates?type=woodgrains' },
           { label: 'Solid Colors', href: '/products/laminates?type=solid' },
-          { label: 'Anti-Bacterial', href: '/products/laminates?type=antibacterial' }
+          { label: 'Anti-Bacterial', href: '/products/laminates?type=antibacterial' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'veneers',
         title: 'Veneers',
+        hoverImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Natural Veneers', href: '/products/veneers?type=natural' },
+          { label: 'Natural Veneers', href: '/products/veneers?type=teak' },
           { label: 'Recon Veneers', href: '/products/veneers?type=recon' },
-          { label: 'Teak Wood', href: '/products/veneers?type=teak' },
           { label: 'Smoked Veneers', href: '/products/veneers?type=smoked' },
           { label: 'Dyed Veneers', href: '/products/veneers?type=dyed' },
-          { label: 'Metallic', href: '/products/veneers?type=metallic' }
+          { label: 'Metallic Veneers', href: '/products/veneers?type=metallic' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'doors',
         title: 'Doors',
+        hoverImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop',
         subItems: [
           { label: 'Flush Doors', href: '/products/doors?type=flush' },
           { label: 'Panel Doors', href: '/products/doors?type=panel' },
           { label: 'Veneered Doors', href: '/products/doors?type=veneered' },
           { label: 'Laminated Doors', href: '/products/doors?type=laminated' },
-          { label: 'Fire Resistant Doors', href: '/products/doors?type=fire' },
-          { label: 'Custom Doors', href: '/products/doors?type=custom' }
+          { label: 'Fire Rated Doors', href: '/products/doors?type=fire' },
+          { label: 'Custom Doors', href: '/products/doors?type=custom' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1558025211-536412e87311?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'hardware',
         title: 'Hardware',
+        hoverImage: 'https://images.unsplash.com/photo-1558211583-05bdfa91b29c?q=80&w=1200&auto=format&fit=crop',
         subItems: [
           { label: 'Door Handles', href: '/products/hardware?type=handles' },
           { label: 'Hinges & Channels', href: '/products/hardware?type=hinges' },
           { label: 'Locks & Security', href: '/products/hardware?type=locks' },
           { label: 'Kitchen Hardware', href: '/products/hardware?type=kitchen' },
           { label: 'Wardrobe Fittings', href: '/products/hardware?type=wardrobe' },
-          { label: 'Glass Fittings', href: '/products/hardware?type=glass' }
+          { label: 'Glass Fittings', href: '/products/hardware?type=glass' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'more',
         title: 'More',
+        hoverImage: 'https://images.unsplash.com/photo-1595428773960-e33e37fcc36e?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'MDF Boards', href: '/products/interiors?type=mdf' },
-          { label: 'Particle Boards', href: '/products/interiors?type=particle' },
-          { label: 'Edge Banding', href: '/products/interiors?type=edge' },
-          { label: 'Adhesives', href: '/products/interiors?type=adhesives' },
-          { label: 'Acrylic Sheets', href: '/products/interiors?type=acrylic' },
-          { label: 'Louvers', href: '/products/interiors?type=louvers' }
+          { label: 'MDF Boards', href: '/products/plywood?type=mdf' },
+          { label: 'Particle Boards', href: '/products/plywood?type=particle' },
+          { label: 'Edge Bands', href: '/products/laminates?type=edge-bands' },
+          { label: 'Adhesives', href: '/products/hardware?type=adhesives' },
+          { label: 'Acrylic Sheets', href: '/products/laminates?type=acrylic' },
+          { label: 'Louvers & Jaali', href: '/products/interiors?type=louvers' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1200&auto=format&fit=crop'
-      }
-    ]
+      },
+    ],
   },
   {
-    title: "Brands",
-    href: "/products",
-    type: "mega",
+    title: 'Brands',
+    type: 'mega',
     columns: [
       {
         id: 'century',
         title: 'CenturyPly',
+        hoverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
         subItems: [
           { label: 'Club Prime', href: '/products?brand=century&series=club-prime' },
-          { label: 'Sainik 710', href: '/products?brand=century&series=sainik' },
-          { label: 'Architect Ply', href: '/products?brand=century&series=architect' },
-          { label: 'Century Doors', href: '/products?brand=century&series=doors' },
-          { label: 'Century Laminates', href: '/products?brand=century&series=laminates' }
+          { label: 'Sainik 710', href: '/products?brand=century&series=sainik-710' },
+          { label: 'Fire Retardant', href: '/products?brand=century&series=fr' },
+          { label: 'Laminates', href: '/products?brand=century&series=laminates' },
+          { label: 'View All', href: '/products?brand=century' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'greenply',
         title: 'Greenply',
+        hoverImage: 'https://images.unsplash.com/photo-1572186789495-2c8ee0134468?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Green Club Plus', href: '/products?brand=greenply&series=club-plus' },
-          { label: 'Green Gold', href: '/products?brand=greenply&series=gold' },
-          { label: 'Ecotec', href: '/products?brand=greenply&series=ecotec' },
+          { label: 'Club Plus BWR', href: '/products?brand=greenply&series=club-plus' },
+          { label: 'MR Grade', href: '/products?brand=greenply&series=mr' },
+          { label: 'Calibrated', href: '/products?brand=greenply&series=calibrated' },
           { label: 'Green Doors', href: '/products?brand=greenply&series=doors' },
-          { label: 'Greenlam', href: '/products?brand=greenlam' }
+          { label: 'View All', href: '/products?brand=greenply' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'merino',
         title: 'Merino',
+        hoverImage: 'https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Laminates', href: '/products?brand=merino&type=laminates' },
-          { label: 'Gloss Panels', href: '/products?brand=merino&type=gloss' },
-          { label: 'Matte Panels', href: '/products?brand=merino&type=matte' },
-          { label: 'Compact Boards', href: '/products?brand=merino&type=compact' },
-          { label: 'Restroom Cubicles', href: '/products?brand=merino&type=cubicles' }
+          { label: 'High Gloss', href: '/products?brand=merino&series=high-gloss' },
+          { label: 'Textured', href: '/products?brand=merino&series=textured' },
+          { label: 'Solid Colors', href: '/products?brand=merino&series=solid' },
+          { label: 'Gloss Panels', href: '/products?brand=merino&series=panels' },
+          { label: 'View All', href: '/products?brand=merino' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1558025211-16315582f3fb?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'hettich',
         title: 'Hettich',
+        hoverImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Hinges', href: '/products?brand=hettich&type=hinges' },
-          { label: 'Drawer Systems', href: '/products?brand=hettich&type=drawers' },
-          { label: 'Sliding Systems', href: '/products?brand=hettich&type=sliding' },
-          { label: 'Kitchen Baskets', href: '/products?brand=hettich&type=baskets' },
-          { label: 'Handles & Knobs', href: '/products?brand=hettich&type=handles' }
+          { label: 'Soft-Close Hinges', href: '/products?brand=hettich&series=hinges' },
+          { label: 'Tandem Boxes', href: '/products?brand=hettich&series=tandem' },
+          { label: 'Drawer Systems', href: '/products?brand=hettich&series=drawers' },
+          { label: 'Sliding Systems', href: '/products?brand=hettich&series=sliding' },
+          { label: 'View All', href: '/products?brand=hettich' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop'
-      },
-      {
-        id: 'hafele',
-        title: 'Hafele',
-        subItems: [
-          { label: 'Architectural Hardware', href: '/products?brand=hafele&type=arch' },
-          { label: 'Kitchen Fittings', href: '/products?brand=hafele&type=kitchen' },
-          { label: 'Sliding Solutions', href: '/products?brand=hafele&type=sliding' },
-          { label: 'Lighting Systems', href: '/products?brand=hafele&type=lighting' },
-          { label: 'Appliances', href: '/products?brand=hafele&type=appliances' }
-        ],
-        hoverImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'godrej',
         title: 'Godrej',
+        hoverImage: 'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Main Door Locks', href: '/products?brand=godrej&type=main-door' },
-          { label: 'Digital Locks', href: '/products?brand=godrej&type=digital' },
-          { label: 'Padlocks', href: '/products?brand=godrej&type=padlocks' },
-          { label: 'Safes & Lockers', href: '/products?brand=godrej&type=safes' },
-          { label: 'Kitchen Accessories', href: '/products?brand=godrej&type=kitchen' }
+          { label: 'Digital Locks', href: '/products?brand=godrej&series=digital-locks' },
+          { label: 'Mortise Locks', href: '/products?brand=godrej&series=mortise' },
+          { label: 'Main Door Locks', href: '/products?brand=godrej&series=main-door' },
+          { label: 'Safes & Lockers', href: '/products?brand=godrej&series=safes' },
+          { label: 'View All', href: '/products?brand=godrej' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1200&auto=format&fit=crop'
-      }
-    ]
+      },
+      {
+        id: 'hafele',
+        title: 'Häfele',
+        hoverImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop',
+        subItems: [
+          { label: 'Glass Fittings', href: '/products?brand=hafele&series=glass' },
+          { label: 'Architectural Hardware', href: '/products?brand=hafele&series=architectural' },
+          { label: 'Lighting Systems', href: '/products?brand=hafele&series=lighting' },
+          { label: 'Appliances', href: '/products?brand=hafele&series=appliances' },
+          { label: 'View All', href: '/products?brand=hafele' },
+        ],
+      },
+    ],
   },
   {
-    title: "Interiors",
-    href: "/products/interiors",
-    type: "mega",
+    title: 'Interiors',
+    type: 'mega',
     columns: [
       {
         id: 'kitchen',
         title: 'Modular Kitchen',
+        hoverImage: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'L-Shaped Kitchens', href: '/products/interiors?type=kitchen&layout=l-shape' },
-          { label: 'U-Shaped Kitchens', href: '/products/interiors?type=kitchen&layout=u-shape' },
-          { label: 'Parallel Kitchens', href: '/products/interiors?type=kitchen&layout=parallel' },
-          { label: 'Island Kitchens', href: '/products/interiors?type=kitchen&layout=island' },
-          { label: 'Straight Kitchens', href: '/products/interiors?type=kitchen&layout=straight' }
+          { label: 'L-Shape Kitchen', href: '/products/interiors?type=kitchen&layout=l-shape' },
+          { label: 'U-Shape Kitchen', href: '/products/interiors?type=kitchen&layout=u-shape' },
+          { label: 'Parallel Kitchen', href: '/products/interiors?type=kitchen&layout=parallel' },
+          { label: 'Island Kitchen', href: '/products/interiors?type=kitchen&layout=island' },
+          { label: 'Straight Kitchen', href: '/products/interiors?type=kitchen&layout=straight' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'bedroom',
         title: 'Bedroom',
+        hoverImage: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop',
         subItems: [
           { label: 'Master Bedroom', href: '/products/interiors?type=bedroom&room=master' },
-          { label: 'Guest Bedroom', href: '/products/interiors?type=bedroom&room=guest' },
           { label: 'Kids Bedroom', href: '/products/interiors?type=bedroom&room=kids' },
-          { label: 'Beds & Headboards', href: '/products/interiors?type=bedroom&furniture=beds' },
-          { label: 'Side Tables', href: '/products/interiors?type=bedroom&furniture=tables' }
+          { label: 'Guest Bedroom', href: '/products/interiors?type=bedroom&room=guest' },
+          { label: 'Study Room', href: '/products/interiors?type=bedroom&room=study' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'wardrobes',
         title: 'Wardrobes',
+        hoverImage: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Swing Door', href: '/products/interiors?type=wardrobes&style=swing' },
-          { label: 'Sliding Door', href: '/products/interiors?type=wardrobes&style=sliding' },
+          { label: 'Swing Wardrobes', href: '/products/interiors?type=wardrobes&style=swing' },
+          { label: 'Sliding Wardrobes', href: '/products/interiors?type=wardrobes&style=sliding' },
           { label: 'Walk-in Closets', href: '/products/interiors?type=wardrobes&style=walk-in' },
           { label: 'Glass Wardrobes', href: '/products/interiors?type=wardrobes&style=glass' },
-          { label: 'Loft Units', href: '/products/interiors?type=wardrobes&style=loft' }
+          { label: 'Loft Wardrobes', href: '/products/interiors?type=wardrobes&style=loft' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1595526114101-97d812ce3c96?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'living',
         title: 'Living Room',
+        hoverImage: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'TV Units', href: '/products/interiors?type=living&furniture=tv-unit' },
-          { label: 'Partitions & Jali', href: '/products/interiors?type=living&furniture=partitions' },
-          { label: 'Wall Paneling', href: '/products/interiors?type=living&furniture=paneling' },
-          { label: 'Display Cabinets', href: '/products/interiors?type=living&furniture=cabinets' },
-          { label: 'Shoe Racks', href: '/products/interiors?type=living&furniture=shoe-racks' }
+          { label: 'TV Units', href: '/products/interiors?type=living&item=tv-unit' },
+          { label: 'Wall Paneling', href: '/products/interiors?type=living&item=paneling' },
+          { label: 'False Ceiling', href: '/products/interiors?type=living&item=ceiling' },
+          { label: 'Crockery Units', href: '/products/interiors?type=living&item=crockery' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'pooja',
         title: 'Pooja Room',
+        hoverImage: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Wall Mounted Mandir', href: '/products/interiors?type=pooja&style=wall' },
+          { label: 'Wall Mounted', href: '/products/interiors?type=pooja&style=wall-mounted' },
           { label: 'Floor Standing', href: '/products/interiors?type=pooja&style=floor' },
-          { label: 'CNC Backpanels', href: '/products/interiors?type=pooja&style=cnc' },
-          { label: 'Storage Drawers', href: '/products/interiors?type=pooja&style=storage' },
-          { label: 'Custom Designs', href: '/products/interiors?type=pooja&style=custom' }
+          { label: 'Corner Units', href: '/products/interiors?type=pooja&style=corner' },
+          { label: 'CNC Design', href: '/products/interiors?type=pooja&style=cnc' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?q=80&w=1200&auto=format&fit=crop'
       },
       {
         id: 'services',
-        title: 'Our Services',
+        title: 'Services',
+        hoverImage: 'https://images.unsplash.com/photo-1595526114101-97d812ce3c96?q=80&w=1200&auto=format&fit=crop',
         subItems: [
-          { label: 'Consultation', href: '/products/interiors?service=consultation' },
-          { label: '3D Design & Render', href: '/products/interiors?service=3d-design' },
-          { label: 'Material Selection', href: '/products/interiors?service=materials' },
-          { label: 'Execution', href: '/products/interiors?service=execution' },
-          { label: 'Maintenance', href: '/products/interiors?service=maintenance' }
+          { label: 'Free Site Visit', href: '/products/interiors?service=site-visit' },
+          { label: '3D Design', href: '/products/interiors?service=3d-design' },
+          { label: 'Installation', href: '/products/interiors?service=installation' },
+          { label: 'AMC Support', href: '/products/interiors?service=amc' },
         ],
-        hoverImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop'
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];

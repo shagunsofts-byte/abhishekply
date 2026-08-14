@@ -57,6 +57,7 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 w-full">
           <div className="flex items-center justify-between">
             
+            <div className="flex items-center">
             {/* Logo */}
             <Link 
               to="/" 
@@ -75,7 +76,7 @@ export const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2 h-full">
+            <nav className="hidden lg:flex items-center gap-8 h-full ml-12">
               {NAVIGATION_DATA.map((item, idx) => (
                 <div 
                   key={idx}
@@ -105,6 +106,8 @@ export const Header = () => {
                 </div>
               ))}
             </nav>
+            </div>
+
 
             {/* Right Actions */}
             <div className="flex items-center gap-2 lg:gap-4 z-10">
