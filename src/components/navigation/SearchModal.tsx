@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, ArrowRight, MessageCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PRODUCTS } from '../../data/catalog';
 import categoriesData from '../../data/categories.json';
+import { useProducts } from '../../context/ProductsContext';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -11,6 +11,7 @@ interface SearchModalProps {
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
+  const { products: PRODUCTS } = useProducts();
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
@@ -42,7 +43,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       p.subcategory?.toLowerCase().includes(q) ||
       p.tags?.some((t) => t.toLowerCase().includes(q))
     ).slice(0, 6);
-  }, [query]);
+  }, [PRODUCTS, query]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -6,39 +6,42 @@ import { CategoryDock } from '../category/CategoryDock';
 const SLIDES = [
   {
     id: 1,
+    eyebrow: "Trusted Since 1995",
     title: (
       <>
-        Premium Plywood,<br className="hidden sm:inline" />
-        Laminates & Hardware<br className="hidden sm:inline" />
-        in Lucknow.
+        Premium Plywood.<br />
+        Built to Last.
       </>
     ),
-    description: "Abhishek Ply & Hardware is a Lucknow plywood dealer and laminate, veneer and hardware store for premium homes, modular kitchens, architects and contractors. Since 1995.",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop"
+    description: "Bahraich's trusted source for plywood, laminates & hardware.",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop",
+    badge: { stat: "29+", label: "Years of Trust" }
   },
   {
     id: 2,
+    eyebrow: "Modular Interiors",
     title: (
       <>
-        Exquisite Interiors,<br className="hidden sm:inline" />
-        Modular Kitchens<br className="hidden sm:inline" />
-        & Wardrobes.
+        Kitchens That<br />
+        Inspire Daily.
       </>
     ),
-    description: "Transform your living spaces with our premium range of modular kitchens, custom wardrobes, and interior solutions tailored to your lifestyle.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop"
+    description: "Custom modular kitchens & wardrobes, designed around you.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
+    badge: { stat: "500+", label: "Homes Furnished" }
   },
   {
     id: 3,
+    eyebrow: "Architectural Hardware",
     title: (
       <>
-        Top-Tier Hardware,<br className="hidden sm:inline" />
-        Security Solutions<br className="hidden sm:inline" />
-        & Door Fittings.
+        Hardware With a<br />
+        Finishing Touch.
       </>
     ),
-    description: "Discover a curated collection of architectural hardware, digital locks, and premium door accessories from leading global brands.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1600&auto=format&fit=crop"
+    description: "Premium locks, handles & fittings from trusted global brands.",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1600&auto=format&fit=crop",
+    badge: { stat: "12+", label: "Global Brands" }
   }
 ];
 
@@ -79,6 +82,27 @@ export const HeroSlider = () => {
         </div>
       </div>
 
+      {/* Floating stat badge — a small signature touch overlapping the image */}
+      <div className="hidden lg:block absolute right-10 xl:right-16 top-1/2 -translate-y-1/2 z-20">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 16 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="bg-white/90 backdrop-blur-md border border-white/60 shadow-xl shadow-black/10 rounded-2xl px-6 py-5 text-right"
+          >
+            <span className="block font-serif text-3xl font-bold text-[#1e1e1e] leading-none">
+              {SLIDES[currentSlide].badge.stat}
+            </span>
+            <span className="block text-[11px] font-outfit uppercase tracking-widest text-amber-600 mt-1.5">
+              {SLIDES[currentSlide].badge.label}
+            </span>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
       {/* Desktop Overlay Gradient to make text 100% crisp and readable */}
       <div 
         className="absolute inset-0 pointer-events-none z-10 hidden lg:block"
@@ -99,13 +123,21 @@ export const HeroSlider = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="w-8 h-[2px] bg-amber-500" />
+                <span className="text-[11px] sm:text-xs font-outfit font-semibold uppercase tracking-[0.2em] text-amber-600">
+                  {SLIDES[currentSlide].eyebrow}
+                </span>
+              </div>
+
               {/* Main Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[52px] xl:text-[56px] font-black text-[#1e1e1e] leading-[1.12] tracking-tight mb-5 font-inter">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[52px] xl:text-[56px] font-bold text-[#1e1e1e] leading-[1.12] tracking-tight mb-4">
                 {SLIDES[currentSlide].title}
               </h1>
 
-              {/* Body Paragraph */}
-              <p className="text-[#5d5d5d] text-sm sm:text-base lg:text-[15.5px] leading-relaxed max-w-[490px] mb-8 font-normal font-inter">
+              {/* Body Line */}
+              <p className="text-[#5d5d5d] text-sm sm:text-base leading-relaxed max-w-[440px] mb-8 font-normal font-inter">
                 {SLIDES[currentSlide].description}
               </p>
             </motion.div>
@@ -130,28 +162,41 @@ export const HeroSlider = () => {
             </a>
           </div>
 
-          {/* Slider Pagination Controls */}
-          <div className="flex items-center gap-3 mb-8">
-            {SLIDES.map((slide, idx) => (
-              <button
-                key={slide.id}
-                onClick={() => setCurrentSlide(idx)}
-                className={`transition-all duration-300 rounded-full h-2.5 ${
-                  currentSlide === idx ? 'w-8 bg-[#e05358]' : 'w-2.5 bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
+          {/* Slider Pagination — animated progress segments with a counter */}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="flex items-center gap-2">
+              {SLIDES.map((slide, idx) => (
+                <button
+                  key={slide.id}
+                  onClick={() => setCurrentSlide(idx)}
+                  className="relative w-9 h-[3px] rounded-full bg-black/10 overflow-hidden"
+                  aria-label={`Go to slide ${idx + 1}`}
+                >
+                  {currentSlide === idx && (
+                    <motion.span
+                      className="absolute inset-y-0 left-0 bg-amber-500 rounded-full"
+                      initial={{ width: '0%' }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 5, ease: 'linear' }}
+                    />
+                  )}
+                  {currentSlide > idx && <span className="absolute inset-0 bg-[#1e1e1e]/70 rounded-full" />}
+                </button>
+              ))}
+            </div>
+            <span className="text-[11px] font-outfit text-gray-400 tabular-nums">
+              0{currentSlide + 1} — 0{SLIDES.length}
+            </span>
           </div>
 
           {/* Trusted By Footer Row */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-[13px] font-inter">
-            <span className="text-gray-500 font-medium">Trusted by</span>
-            <div className="flex items-center gap-5 sm:gap-7 font-bold text-[#2d2d2d]">
-              <span className="hover:text-[#e05358] transition-colors cursor-default">Century Ply</span>
-              <span className="hover:text-[#e05358] transition-colors cursor-default">Hettich</span>
-              <span className="hover:text-[#e05358] transition-colors cursor-default">Häfele</span>
-              <span className="hover:text-[#e05358] transition-colors cursor-default">Godrej</span>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] sm:text-xs font-inter">
+            <span className="text-gray-400 font-medium">Trusted by</span>
+            <div className="flex items-center gap-4 sm:gap-6 font-semibold text-[#3d3d3d]">
+              <span className="hover:text-amber-600 transition-colors cursor-default">CenturyPly</span>
+              <span className="hover:text-amber-600 transition-colors cursor-default">Hettich</span>
+              <span className="hover:text-amber-600 transition-colors cursor-default">Häfele</span>
+              <span className="hover:text-amber-600 transition-colors cursor-default">Godrej</span>
             </div>
           </div>
         </div>

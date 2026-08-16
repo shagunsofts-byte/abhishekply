@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { collection, query, orderBy, onSnapshot, doc, updateDoc, Timestamp } from 'firebase/firestore';
-import { LogOut, Phone, Package, Clock, AlertTriangle, RefreshCw } from 'lucide-react';
+import { Phone, Package, Clock, AlertTriangle, RefreshCw, BellRing, BellOff } from 'lucide-react';
 import { auth, db } from '../../firebase_config';
+import { AdminNavBar } from '../../components/admin/AdminNavBar';
 
 interface QuoteRequestDoc {
   id: string;
@@ -20,12 +21,49 @@ const STATUS_STYLES: Record<string, string> = {
   closed: 'bg-zinc-100 text-zinc-500 border-zinc-200',
 };
 
+const BASE_TITLE = 'Quote Requests — Admin';
+
+// Short two-tone "ping" synthesized with the Web Audio API — no external file needed.
+function playPingSound() {
+  try {
+    const Ctx = window.AudioContext || (window as any).webkitAudioContext;
+    const ctx = new Ctx();
+    const now = ctx.currentTime;
+    [880, 1180].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, now + i * 0.14);
+      gain.gain.exponentialRampToValueAtTime(0.2, now + i * 0.14 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.14 + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.14);
+      osc.stop(now + i * 0.14 + 0.4);
+    });
+  } catch (e) {
+    // Web Audio unsupported/blocked — silent fail, visual badge still works.
+  }
+}
+
 export default function AdminQuotesPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null | undefined>(undefined);
   const [requests, setRequests] = useState<QuoteRequestDoc[]>([]);
   const [permissionError, setPermissionError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [notifPermission, setNotifPermission] = useState<NotificationPermission | 'unsupported'>(
+    typeof Notification !== 'undefined' ? Notification.permission : 'unsupported'
+  );
+  const isFirstSnapshot = useRef(true);
+
+  const enableNotifications = async () => {
+    if (typeof Notification === 'undefined') return;
+    const perm = await Notification.requestPermission();
+    setNotifPermission(perm);
+  };
 
   // Auth guard
   useEffect(() => {
@@ -46,6 +84,24 @@ export default function AdminQuotesPage() {
         setRequests(snap.docs.map((d) => ({ id: d.id, ...d.data() } as QuoteRequestDoc)));
         setPermissionError(false);
         setLoading(false);
+
+        // Alert only for docs that arrive AFTER the initial page load — not the
+        // existing backlog, so opening the dashboard doesn't fire a dozen dings.
+        if (!isFirstSnapshot.current) {
+          const newlyAdded = snap.docChanges().filter((c) => c.type === 'added');
+          if (newlyAdded.length > 0) {
+            if (soundEnabled) playPingSound();
+            if (notifPermission === 'granted') {
+              const first = newlyAdded[0].doc.data() as QuoteRequestDoc;
+              new Notification('New Quote Request', {
+                body: `${first.customerName || 'A customer'} requested a quote for ${first.items?.length || 0} item(s).`,
+                icon: '/favicon-32.png',
+                tag: 'quote-request',
+              });
+            }
+          }
+        }
+        isFirstSnapshot.current = false;
       },
       (err) => {
         console.error(err);
@@ -54,7 +110,14 @@ export default function AdminQuotesPage() {
       }
     );
     return () => unsub();
-  }, [user]);
+  }, [user, soundEnabled, notifPermission]);
+
+  // Tab title shows a live badge so the admin notices new requests even in a background tab.
+  useEffect(() => {
+    const newCount = requests.filter((r) => (r.status || 'new') === 'new').length;
+    document.title = newCount > 0 ? `(${newCount}) New — ${BASE_TITLE}` : BASE_TITLE;
+    return () => { document.title = BASE_TITLE; };
+  }, [requests]);
 
   const markStatus = async (id: string, status: string) => {
     try {
@@ -76,25 +139,37 @@ export default function AdminQuotesPage() {
 
   return (
     <main className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b border-zinc-200 px-6 py-5 flex items-center justify-between sticky top-0 z-10">
-        <div>
-          <h1 className="font-serif text-xl font-bold text-zinc-900">Quote Requests</h1>
-          <p className="text-xs text-zinc-500 font-inter">{user?.email}</p>
-        </div>
-        <div className="flex items-center gap-4">
-          {newCount > 0 && (
-            <span className="bg-amber-500 text-zinc-950 text-xs font-outfit font-bold px-3 py-1.5 rounded-full">
-              {newCount} New
-            </span>
-          )}
-          <button
-            onClick={() => signOut(auth)}
-            className="flex items-center gap-1.5 text-sm font-outfit text-zinc-500 hover:text-zinc-900 transition-colors"
-          >
-            <LogOut className="w-4 h-4" /> Sign Out
-          </button>
-        </div>
-      </header>
+      <AdminNavBar
+        user={user}
+        title="Quote Requests"
+        right={
+          <>
+            {newCount > 0 && (
+              <span className="bg-amber-500 text-zinc-950 text-xs font-outfit font-bold px-3 py-1.5 rounded-full">
+                {newCount} New
+              </span>
+            )}
+
+            {notifPermission !== 'granted' && notifPermission !== 'unsupported' && (
+              <button
+                onClick={enableNotifications}
+                className="flex items-center gap-1.5 text-xs font-outfit font-medium px-3 py-1.5 rounded-full bg-zinc-900 text-white hover:bg-amber-600 transition-colors"
+              >
+                <BellRing className="w-3.5 h-3.5" /> Enable Alerts
+              </button>
+            )}
+
+            <button
+              onClick={() => setSoundEnabled((s) => !s)}
+              aria-label={soundEnabled ? 'Mute sound alerts' : 'Unmute sound alerts'}
+              className="p-2 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+              title={soundEnabled ? 'Sound alerts on' : 'Sound alerts off'}
+            >
+              {soundEnabled ? <BellRing className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
+            </button>
+          </>
+        }
+      />
 
       <div className="max-w-4xl mx-auto px-6 py-8">
         {permissionError ? (

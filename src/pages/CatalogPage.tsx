@@ -2,15 +2,17 @@ import React, { useMemo, useState } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, SlidersHorizontal } from 'lucide-react';
-import { PRODUCTS, BRANDS, Product } from '../data/catalog';
+import { BRANDS, Product } from '../data/catalog';
 import categoriesData from '../data/categories.json';
 import { ProductCard } from '../components/ProductCard';
 import { SeoWrapper } from '../components/SeoWrapper';
 import { SITE_CONFIG } from '../data/siteConfig';
+import { useProducts } from '../context/ProductsContext';
 
 const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 export default function CatalogPage() {
+  const { products: PRODUCTS } = useProducts();
   const { category } = useParams<{ category?: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -45,7 +47,7 @@ export default function CatalogPage() {
     }
 
     return list.sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
-  }, [category, brandParam, typeParam, qParam]);
+  }, [PRODUCTS, category, brandParam, typeParam, qParam]);
 
   // Graceful fallback: if a hyper-specific filter combo returns nothing,
   // still show something relevant instead of a dead end.
@@ -55,7 +57,7 @@ export default function CatalogPage() {
     let list = category ? PRODUCTS.filter((p) => p.categorySlug === category) : PRODUCTS.filter((p) => p.isFeatured);
     if (list.length === 0) list = PRODUCTS.filter((p) => p.isFeatured);
     return list.slice(0, 8);
-  }, [showFallback, category]);
+  }, [PRODUCTS, showFallback, category]);
 
   const heading = activeCategoryMeta?.name || (qParam ? `Results for "${qParam}"` : brandParam ? brandParam : 'All Products');
   const description = activeCategoryMeta?.description || 'Browse our full range of premium plywood, laminates, veneers, doors, hardware and interior solutions.';

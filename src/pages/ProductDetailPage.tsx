@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MessageCircle, Phone, ChevronRight, Check, ShieldCheck, ShoppingBag } from 'lucide-react';
-import { PRODUCTS } from '../data/catalog';
 import categoriesData from '../data/categories.json';
 import { ProductCard } from '../components/ProductCard';
 import { SeoWrapper } from '../components/SeoWrapper';
 import { SITE_CONFIG } from '../data/siteConfig';
 import { useQuote } from '../context/QuoteContext';
+import { useProducts } from '../context/ProductsContext';
 import { ImageLightbox } from '../components/ImageLightbox';
 
 export default function ProductDetailPage() {
+  const { products: PRODUCTS, loading: productsLoading } = useProducts();
   const { slug } = useParams<{ slug: string }>();
   const product = PRODUCTS.find((p) => p.slug === slug);
   const [activeImage, setActiveImage] = useState(0);
@@ -18,6 +19,15 @@ export default function ProductDetailPage() {
   const { addToQuote, isInQuote } = useQuote();
 
   if (!product) {
+    // Don't redirect until live data has had a chance to load — a product added
+    // via the admin panel won't be in the bundled starter catalog we render first.
+    if (productsLoading) {
+      return (
+        <main className="min-h-screen bg-zinc-50 flex items-center justify-center pt-24">
+          <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+        </main>
+      );
+    }
     return <Navigate to="/products" replace />;
   }
 
