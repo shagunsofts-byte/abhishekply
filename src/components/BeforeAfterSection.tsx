@@ -78,13 +78,13 @@ export const BeforeAfterSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="text-amber-500 font-outfit tracking-widest uppercase text-sm font-semibold mb-4 block">
+          <span className="text-brass-500 font-outfit tracking-widest uppercase text-sm font-semibold mb-4 block">
             See the Difference
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-zinc-900">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-stone-900">
             {comparisonData.title}
           </h2>
-          <p className="text-zinc-600 font-inter text-lg max-w-2xl mx-auto">
+          <p className="text-stone-600 font-inter text-lg max-w-2xl mx-auto">
             {comparisonData.subtitle}
           </p>
         </motion.div>
@@ -96,7 +96,7 @@ export const BeforeAfterSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-black/10 group bg-zinc-100 h-[60vh] md:h-[80vh]"
+          className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-black/10 group bg-stone-100 h-[60vh] md:h-[80vh]"
         >
           {/* Main Container */}
           <div 
@@ -140,20 +140,20 @@ export const BeforeAfterSection = () => {
               />
               
               {/* Top Right Label: AFTER */}
-              <div className="absolute top-6 right-6 z-10 bg-amber-500/90 backdrop-blur-md px-5 py-2 rounded-full shadow-lg shadow-amber-500/20 border border-amber-400 pointer-events-none">
-                <span className="text-xs font-outfit uppercase tracking-widest text-zinc-900/80 block mb-0.5">After</span>
-                <span className="text-sm font-inter text-zinc-950 font-bold">Premium Acrylic Finish</span>
+              <div className="absolute top-6 right-6 z-10 bg-brass-500/90 backdrop-blur-md px-5 py-2 rounded-full shadow-lg shadow-brass-500/20 border border-brass-400 pointer-events-none">
+                <span className="text-xs font-outfit uppercase tracking-widest text-stone-900/80 block mb-0.5">After</span>
+                <span className="text-sm font-inter text-stone-950 font-bold">Premium Acrylic Finish</span>
               </div>
             </motion.div>
 
             {/* Divider Line */}
             <motion.div 
-              className="absolute top-0 bottom-0 w-[1px] md:w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-amber-400 to-transparent shadow-[0_0_10px_rgba(251,191,36,0.6)] z-20 pointer-events-none"
+              className="absolute top-0 bottom-0 w-[1px] md:w-[2px] -translate-x-1/2 bg-gradient-to-b from-transparent via-brass-400 to-transparent shadow-[0_0_10px_rgba(251,191,36,0.6)] z-20 pointer-events-none"
               style={{ left: useTransform(springX, (val) => `${val}%`) }}
             >
               {/* Handle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border-2 border-amber-400 flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-all duration-300 pointer-events-auto cursor-grab active:cursor-grabbing">
-                <div className="flex gap-1 text-amber-400">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border-2 border-brass-400 flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.3)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(251,191,36,0.5)] transition-all duration-300 pointer-events-auto cursor-grab active:cursor-grabbing">
+                <div className="flex gap-1 text-brass-400">
                   <motion.div animate={{ x: [-2, 2, -2] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
                     <ChevronLeft className="w-5 h-5" />
                   </motion.div>

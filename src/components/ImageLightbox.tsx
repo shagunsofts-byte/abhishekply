@@ -40,7 +40,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ images, activeInde
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
-        className="fixed inset-0 z-[300] bg-zinc-950/95 backdrop-blur-md flex flex-col"
+        className="fixed inset-0 z-[300] bg-stone-950/95 backdrop-blur-md flex flex-col"
         onClick={onClose}
       >
         {/* Top bar */}
@@ -102,7 +102,7 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ images, activeInde
                 key={idx}
                 onClick={() => onNavigate(idx)}
                 className={`w-14 h-14 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${
-                  idx === activeIndex ? 'border-amber-500 opacity-100' : 'border-transparent opacity-40 hover:opacity-70'
+                  idx === activeIndex ? 'border-brass-500 opacity-100' : 'border-transparent opacity-40 hover:opacity-70'
                 }`}
               >
                 <img src={img} alt="" className="w-full h-full object-cover" />

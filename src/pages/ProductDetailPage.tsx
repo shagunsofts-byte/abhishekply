@@ -23,8 +23,8 @@ export default function ProductDetailPage() {
     // via the admin panel won't be in the bundled starter catalog we render first.
     if (productsLoading) {
       return (
-        <main className="min-h-screen bg-zinc-50 flex items-center justify-center pt-24">
-          <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+        <main className="min-h-screen bg-stone-50 flex items-center justify-center pt-24">
+          <div className="w-6 h-6 border-2 border-brass-500 border-t-transparent rounded-full animate-spin" />
         </main>
       );
     }
@@ -49,21 +49,21 @@ export default function ProductDetailPage() {
         description={product.shortDescription || product.description}
         ogImage={images[0]}
       />
-      <main className="relative w-full min-h-screen bg-zinc-50 text-zinc-950 pt-28 pb-24">
+      <main className="relative w-full min-h-screen bg-stone-50 text-stone-950 pt-28 pb-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Breadcrumb */}
-          <nav className="text-xs font-outfit text-zinc-500 mb-8 flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-amber-600 transition-colors">Home</Link>
+          <nav className="text-xs font-outfit text-stone-500 mb-8 flex items-center gap-2 flex-wrap">
+            <Link to="/" className="hover:text-brass-600 transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link to="/products" className="hover:text-amber-600 transition-colors">Products</Link>
+            <Link to="/products" className="hover:text-brass-600 transition-colors">Products</Link>
             {categoryMeta && (
               <>
                 <ChevronRight className="w-3 h-3" />
-                <Link to={`/products/${categoryMeta.slug}`} className="hover:text-amber-600 transition-colors">{categoryMeta.name}</Link>
+                <Link to={`/products/${categoryMeta.slug}`} className="hover:text-brass-600 transition-colors">{categoryMeta.name}</Link>
               </>
             )}
             <ChevronRight className="w-3 h-3" />
-            <span className="text-zinc-900 font-medium">{product.shortName || product.name}</span>
+            <span className="text-stone-900 font-medium">{product.shortName || product.name}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16">
@@ -75,7 +75,7 @@ export default function ProductDetailPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
                 onClick={() => setLightboxOpen(true)}
-                className="group relative aspect-square rounded-3xl overflow-hidden bg-zinc-100 mb-4 p-6 md:p-8 cursor-zoom-in border border-zinc-100"
+                className="group relative aspect-square rounded-3xl overflow-hidden bg-stone-100 mb-4 p-6 md:p-8 cursor-zoom-in border border-stone-100"
               >
                 <div className="relative w-full h-full overflow-hidden rounded-xl">
                   <img
@@ -85,11 +85,11 @@ export default function ProductDetailPage() {
                   />
                 </div>
                 {product.isNew && (
-                  <span className="absolute top-4 left-4 bg-amber-500 text-zinc-950 text-xs font-outfit font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+                  <span className="absolute top-4 left-4 bg-brass-500 text-stone-950 text-xs font-outfit font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
                     New
                   </span>
                 )}
-                <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-zinc-700 text-[11px] font-outfit font-medium px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-stone-700 text-[11px] font-outfit font-medium px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                   Click to zoom
                 </span>
               </motion.div>
@@ -99,8 +99,8 @@ export default function ProductDetailPage() {
                     <button
                       key={idx}
                       onClick={() => setActiveImage(idx)}
-                      className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-colors shrink-0 bg-zinc-50 ${
-                        activeImage === idx ? 'border-amber-500' : 'border-transparent opacity-70 hover:opacity-100'
+                      className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-colors shrink-0 bg-stone-50 ${
+                        activeImage === idx ? 'border-brass-500' : 'border-transparent opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={img} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-contain p-1" />
@@ -122,22 +122,22 @@ export default function ProductDetailPage() {
 
             {/* Info */}
             <div className="flex flex-col">
-              <span className="text-xs font-outfit font-bold uppercase tracking-widest text-amber-600 mb-3">
+              <span className="text-xs font-outfit font-bold uppercase tracking-widest text-brass-600 mb-3">
                 {product.brand} {product.subcategory ? `· ${product.subcategory}` : ''}
               </span>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-zinc-900 mb-4 leading-tight">
+              <h1 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4 leading-tight">
                 {product.name}
               </h1>
-              <p className="text-zinc-600 font-inter leading-relaxed mb-6">
+              <p className="text-stone-600 font-inter leading-relaxed mb-6">
                 {product.description}
               </p>
 
               <div className="flex items-center gap-3 mb-8">
-                <span className="text-lg font-outfit font-semibold text-zinc-900">
+                <span className="text-lg font-outfit font-semibold text-stone-900">
                   {product.priceLabel || 'Enquire for Price'}
                 </span>
                 <span className={`text-xs font-outfit font-medium px-3 py-1 rounded-full ${
-                  product.availability === 'In Stock' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
+                  product.availability === 'In Stock' ? 'bg-green-50 text-green-700' : 'bg-brass-50 text-brass-700'
                 }`}>
                   {product.availability || 'Available on Order'}
                 </span>
@@ -146,12 +146,12 @@ export default function ProductDetailPage() {
               {/* Sizes */}
               {product.sizes && product.sizes.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-zinc-400 mb-3">
+                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-stone-400 mb-3">
                     Available Sizes
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {product.sizes.map((s) => (
-                      <span key={s} className="px-4 py-2 rounded-full border border-zinc-200 text-sm font-inter text-zinc-700 bg-white">
+                      <span key={s} className="px-4 py-2 rounded-full border border-stone-200 text-sm font-inter text-stone-700 bg-white">
                         {s}
                       </span>
                     ))}
@@ -162,12 +162,12 @@ export default function ProductDetailPage() {
               {/* Colors */}
               {product.colors && product.colors.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-zinc-400 mb-3">
+                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-stone-400 mb-3">
                     Colours / Finishes
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {product.colors.map((c) => (
-                      <span key={c} className="px-4 py-2 rounded-full border border-zinc-200 text-sm font-inter text-zinc-700 bg-white">
+                      <span key={c} className="px-4 py-2 rounded-full border border-stone-200 text-sm font-inter text-stone-700 bg-white">
                         {c}
                       </span>
                     ))}
@@ -178,13 +178,13 @@ export default function ProductDetailPage() {
               {/* Features */}
               {product.features && product.features.length > 0 && (
                 <div className="mb-8">
-                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-zinc-400 mb-3">
+                  <h4 className="text-xs font-outfit font-semibold uppercase tracking-widest text-stone-400 mb-3">
                     Key Features
                   </h4>
                   <ul className="space-y-2">
                     {product.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2.5 text-sm font-inter text-zinc-700">
-                        <Check className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" /> {f}
+                      <li key={f} className="flex items-start gap-2.5 text-sm font-inter text-stone-700">
+                        <Check className="w-4 h-4 text-brass-500 mt-0.5 shrink-0" /> {f}
                       </li>
                     ))}
                   </ul>
@@ -197,8 +197,8 @@ export default function ProductDetailPage() {
                   onClick={() => !isInQuote(product.id) && addToQuote(product)}
                   className={`flex-1 py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors ${
                     isInQuote(product.id)
-                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                      : 'bg-zinc-900 hover:bg-amber-600 text-white'
+                      ? 'bg-brass-50 text-brass-700 border border-brass-200'
+                      : 'bg-stone-900 hover:bg-brass-600 text-white'
                   }`}
                 >
                   {isInQuote(product.id) ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
@@ -216,13 +216,13 @@ export default function ProductDetailPage() {
                 </a>
                 <a
                   href={`tel:+91${SITE_CONFIG.primaryPhone}`}
-                  className="flex-1 bg-white border border-zinc-200 hover:border-amber-400 text-zinc-900 py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors"
+                  className="flex-1 bg-white border border-stone-200 hover:border-brass-400 text-stone-900 py-3.5 px-6 rounded-full flex items-center justify-center gap-2 font-outfit font-medium transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call for Pricing
                 </a>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-zinc-400 font-inter">
+              <div className="flex items-center gap-2 text-xs text-stone-400 font-inter">
                 <ShieldCheck className="w-4 h-4" /> Sourced directly from authorised {product.brand} dealers.
               </div>
             </div>
@@ -231,17 +231,17 @@ export default function ProductDetailPage() {
           {/* Specifications */}
           {product.specifications && Object.keys(product.specifications).length > 0 && (
             <div className="mt-16 max-w-3xl">
-              <h2 className="text-2xl font-serif font-bold text-zinc-900 mb-6">Specifications</h2>
-              <div className="bg-white rounded-2xl border border-zinc-200 overflow-hidden">
+              <h2 className="text-2xl font-serif font-bold text-stone-900 mb-6">Specifications</h2>
+              <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
                 {Object.entries(product.specifications).map(([key, value], idx) => (
                   <div
                     key={key}
                     className={`flex items-center justify-between px-6 py-4 text-sm font-inter ${
-                      idx % 2 === 0 ? 'bg-zinc-50/60' : 'bg-white'
+                      idx % 2 === 0 ? 'bg-stone-50/60' : 'bg-white'
                     }`}
                   >
-                    <span className="text-zinc-500">{key}</span>
-                    <span className="text-zinc-900 font-medium">{value}</span>
+                    <span className="text-stone-500">{key}</span>
+                    <span className="text-stone-900 font-medium">{value}</span>
                   </div>
                 ))}
               </div>
@@ -252,9 +252,9 @@ export default function ProductDetailPage() {
           {related.length > 0 && (
             <div className="mt-20">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl md:text-3xl font-serif font-bold text-zinc-900">You may also like</h2>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900">You may also like</h2>
                 {categoryMeta && (
-                  <Link to={`/products/${categoryMeta.slug}`} className="text-sm font-outfit font-medium text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                  <Link to={`/products/${categoryMeta.slug}`} className="text-sm font-outfit font-medium text-brass-600 hover:text-brass-700 flex items-center gap-1">
                     View all <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 )}

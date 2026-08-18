@@ -26,36 +26,36 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+    <main className="min-h-screen bg-stone-950 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-6 h-6 text-amber-500" />
+          <div className="w-14 h-14 rounded-2xl bg-brass-500/10 border border-brass-500/20 flex items-center justify-center mx-auto mb-4">
+            <Lock className="w-6 h-6 text-brass-500" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-white mb-1">Admin Sign In</h1>
-          <p className="text-sm text-zinc-500 font-inter">Abhishek Ply & Hardware — Quote Dashboard</p>
+          <p className="text-sm text-stone-500 font-inter">Abhishek Ply & Hardware — Quote Dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-stone-900 border border-stone-800 rounded-2xl p-6 space-y-4">
           <div>
-            <label className="text-xs font-outfit text-zinc-400 mb-1.5 block">Email</label>
+            <label className="text-xs font-outfit text-stone-400 mb-1.5 block">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm font-inter outline-none focus:border-amber-500"
+              className="w-full px-4 py-2.5 rounded-xl bg-stone-800 border border-stone-700 text-white text-sm font-inter outline-none focus:border-brass-500"
               placeholder="admin@abhishekplyandhardware.com"
             />
           </div>
           <div>
-            <label className="text-xs font-outfit text-zinc-400 mb-1.5 block">Password</label>
+            <label className="text-xs font-outfit text-stone-400 mb-1.5 block">Password</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm font-inter outline-none focus:border-amber-500"
+              className="w-full px-4 py-2.5 rounded-xl bg-stone-800 border border-stone-700 text-white text-sm font-inter outline-none focus:border-brass-500"
               placeholder="••••••••"
             />
           </div>
@@ -65,13 +65,13 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-zinc-950 py-3 rounded-full font-outfit font-semibold flex items-center justify-center gap-2 transition-colors"
+            className="w-full bg-brass-500 hover:bg-brass-400 disabled:opacity-60 text-stone-950 py-3 rounded-full font-outfit font-semibold flex items-center justify-center gap-2 transition-colors"
           >
             <LogIn className="w-4 h-4" /> {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <p className="text-center text-xs text-zinc-600 font-inter mt-6">
+        <p className="text-center text-xs text-stone-600 font-inter mt-6">
           This area is restricted to store administrators.
         </p>
       </div>

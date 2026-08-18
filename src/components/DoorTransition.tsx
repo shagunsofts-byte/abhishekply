@@ -82,7 +82,7 @@ export const DoorTransition: React.FC<DoorTransitionProps> = ({ children, onComp
   };
 
   return (
-    <div className={`relative min-h-screen w-full bg-zinc-950 ${!isRemoved ? 'overflow-hidden h-screen' : ''}`}>
+    <div className={`relative min-h-screen w-full bg-stone-950 ${!isRemoved ? 'overflow-hidden h-screen' : ''}`}>
       {/* Audio Hooks (src is empty for later local assets) */}
       <audio ref={unlatchSoundRef} preload="auto" />
       <audio ref={creakSoundRef} preload="auto" />
@@ -115,7 +115,7 @@ export const DoorTransition: React.FC<DoorTransitionProps> = ({ children, onComp
                     animate={{ x: [0, 10, 0] }}
                     transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                   >
-                    <ArrowRight className="w-6 h-6 text-amber-500/80" />
+                    <ArrowRight className="w-6 h-6 text-brass-500/80" />
                   </motion.div>
                 </motion.div>
               )}

@@ -64,14 +64,14 @@ export const Header = () => {
               className="flex items-center gap-2 group cursor-pointer relative z-10"
               onMouseEnter={() => setActiveMenu(null)}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-700 group-hover:rotate-180 ${'text-zinc-900'}`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-700 group-hover:rotate-180 ${'text-stone-900'}`}>
                 <path d="M2 22L12 2l10 20"/>
                 <path d="M12 12h8"/>
                 <path d="M4 12h8"/>
               </svg>
               <div className="flex flex-col">
-                <span className={`font-serif text-xl font-bold tracking-wide leading-none transition-colors duration-300 ${'text-zinc-900'}`}>ABHISHEK</span>
-                <span className="text-[0.6rem] font-outfit text-amber-500 tracking-widest uppercase">Ply & Hardware</span>
+                <span className={`font-serif text-xl font-bold tracking-wide leading-none transition-colors duration-300 ${'text-stone-900'}`}>ABHISHEK</span>
+                <span className="text-[0.6rem] font-outfit text-brass-500 tracking-widest uppercase">Ply & Hardware</span>
               </div>
             </Link>
 
@@ -87,20 +87,20 @@ export const Header = () => {
                     <Link 
                       to={item.href}
                       className={`font-outfit font-medium text-sm tracking-wide transition-colors relative group py-2 ${
-                        'text-zinc-600 hover:text-zinc-900'
+                        'text-stone-600 hover:text-stone-900'
                       }`}
                     >
                       {item.title}
-                      <span className={`absolute -bottom-1 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${'bg-amber-500'}`} />
+                      <span className={`absolute -bottom-1 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${'bg-brass-500'}`} />
                     </Link>
                   ) : (
                     <div 
                       className={`cursor-pointer font-outfit font-medium text-sm tracking-wide transition-colors relative group py-2 flex items-center gap-1 ${
-                        'text-zinc-600 hover:text-zinc-900'
-                      } ${activeMenu === item.title ? ('text-zinc-900') : ''}`}
+                        'text-stone-600 hover:text-stone-900'
+                      } ${activeMenu === item.title ? ('text-stone-900') : ''}`}
                     >
                       {item.title}
-                      <span className={`absolute -bottom-1 left-0 h-[2px] transition-all duration-300 ${activeMenu === item.title ? 'w-full' : 'w-0'} group-hover:w-full ${'bg-amber-500'}`} />
+                      <span className={`absolute -bottom-1 left-0 h-[2px] transition-all duration-300 ${activeMenu === item.title ? 'w-full' : 'w-0'} group-hover:w-full ${'bg-brass-500'}`} />
                     </div>
                   )}
                 </div>
@@ -115,7 +115,7 @@ export const Header = () => {
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
-                className="p-2 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                className="p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
               >
                 <Search className="w-5 h-5" />
               </button>
@@ -123,11 +123,11 @@ export const Header = () => {
               <button
                 onClick={openDrawer}
                 aria-label="View quote list"
-                className="relative p-2 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                className="relative p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-amber-500 text-zinc-950 text-[10px] font-outfit font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-brass-500 text-stone-950 text-[10px] font-outfit font-bold rounded-full flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
@@ -140,7 +140,7 @@ export const Header = () => {
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Hi, I am looking for a quote.')}`}
                   target="_blank"
                   rel="noreferrer"
-                  className={`px-6 py-2.5 rounded-full font-outfit font-medium text-sm transition-all duration-300 shadow-sm ml-2 bg-zinc-900 text-white border border-zinc-900 hover:bg-amber-600 hover:border-amber-600`}
+                  className={`px-6 py-2.5 rounded-full font-outfit font-medium text-sm transition-all duration-300 shadow-sm ml-2 bg-stone-900 text-white border border-stone-900 hover:bg-brass-600 hover:border-brass-600`}
                 >
                   Get Quote
                 </a>
@@ -149,7 +149,7 @@ export const Header = () => {
               {/* Mobile Menu Toggle */}
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className={`lg:hidden p-2 -mr-2 transition-colors ${'text-zinc-900'}`}
+                className={`lg:hidden p-2 -mr-2 transition-colors ${'text-stone-900'}`}
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -175,7 +175,7 @@ export const Header = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-zinc-900/20 backdrop-blur-sm z-[90]"
+            className="fixed inset-0 bg-stone-900/20 backdrop-blur-sm z-[90]"
             onMouseEnter={() => setActiveMenu(null)}
           />
         )}

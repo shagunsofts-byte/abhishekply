@@ -23,7 +23,7 @@ export const ImageUrlListInput: React.FC<ImageUrlListInputProps> = ({ images, on
     <div className="space-y-3">
       {images.map((url, idx) => (
         <div key={idx} className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-lg overflow-hidden bg-zinc-100 border border-zinc-200 shrink-0 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-lg overflow-hidden bg-stone-100 border border-stone-200 shrink-0 flex items-center justify-center">
             {url ? (
               <img
                 src={url}
@@ -34,7 +34,7 @@ export const ImageUrlListInput: React.FC<ImageUrlListInputProps> = ({ images, on
                 }}
               />
             ) : (
-              <ImageOff className="w-5 h-5 text-zinc-300" />
+              <ImageOff className="w-5 h-5 text-stone-300" />
             )}
           </div>
           <input
@@ -42,12 +42,12 @@ export const ImageUrlListInput: React.FC<ImageUrlListInputProps> = ({ images, on
             value={url}
             onChange={(e) => updateAt(idx, e.target.value)}
             placeholder="https://res.cloudinary.com/your-cloud/image/upload/..."
-            className="flex-1 px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+            className="flex-1 px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
           />
           <button
             type="button"
             onClick={() => removeAt(idx)}
-            className="w-9 h-9 rounded-lg flex items-center justify-center text-zinc-400 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
+            className="w-9 h-9 rounded-lg flex items-center justify-center text-stone-400 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
             aria-label="Remove image"
           >
             <X className="w-4 h-4" />
@@ -57,11 +57,11 @@ export const ImageUrlListInput: React.FC<ImageUrlListInputProps> = ({ images, on
       <button
         type="button"
         onClick={addRow}
-        className="flex items-center gap-1.5 text-xs font-outfit font-medium text-amber-600 hover:text-amber-700 transition-colors"
+        className="flex items-center gap-1.5 text-xs font-outfit font-medium text-brass-600 hover:text-brass-700 transition-colors"
       >
         <Plus className="w-3.5 h-3.5" /> Add Cloudinary Image URL
       </button>
-      <p className="text-[11px] text-zinc-400 font-inter">
+      <p className="text-[11px] text-stone-400 font-inter">
         Upload your photo to Cloudinary first, then paste the resulting image URL here. The first image is used as
         the product thumbnail everywhere on the site.
       </p>

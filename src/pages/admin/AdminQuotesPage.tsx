@@ -16,9 +16,9 @@ interface QuoteRequestDoc {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  new: 'bg-amber-50 text-amber-700 border-amber-200',
+  new: 'bg-brass-50 text-brass-700 border-brass-200',
   contacted: 'bg-blue-50 text-blue-700 border-blue-200',
-  closed: 'bg-zinc-100 text-zinc-500 border-zinc-200',
+  closed: 'bg-stone-100 text-stone-500 border-stone-200',
 };
 
 const BASE_TITLE = 'Quote Requests — Admin';
@@ -131,21 +131,21 @@ export default function AdminQuotesPage() {
 
   if (user === undefined || loading) {
     return (
-      <main className="min-h-screen bg-zinc-50 flex items-center justify-center">
-        <RefreshCw className="w-6 h-6 text-zinc-400 animate-spin" />
+      <main className="min-h-screen bg-stone-50 flex items-center justify-center">
+        <RefreshCw className="w-6 h-6 text-stone-400 animate-spin" />
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-zinc-50">
+    <main className="min-h-screen bg-stone-50">
       <AdminNavBar
         user={user}
         title="Quote Requests"
         right={
           <>
             {newCount > 0 && (
-              <span className="bg-amber-500 text-zinc-950 text-xs font-outfit font-bold px-3 py-1.5 rounded-full">
+              <span className="bg-brass-500 text-stone-950 text-xs font-outfit font-bold px-3 py-1.5 rounded-full">
                 {newCount} New
               </span>
             )}
@@ -153,7 +153,7 @@ export default function AdminQuotesPage() {
             {notifPermission !== 'granted' && notifPermission !== 'unsupported' && (
               <button
                 onClick={enableNotifications}
-                className="flex items-center gap-1.5 text-xs font-outfit font-medium px-3 py-1.5 rounded-full bg-zinc-900 text-white hover:bg-amber-600 transition-colors"
+                className="flex items-center gap-1.5 text-xs font-outfit font-medium px-3 py-1.5 rounded-full bg-stone-900 text-white hover:bg-brass-600 transition-colors"
               >
                 <BellRing className="w-3.5 h-3.5" /> Enable Alerts
               </button>
@@ -162,7 +162,7 @@ export default function AdminQuotesPage() {
             <button
               onClick={() => setSoundEnabled((s) => !s)}
               aria-label={soundEnabled ? 'Mute sound alerts' : 'Unmute sound alerts'}
-              className="p-2 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+              className="p-2 rounded-full text-stone-400 hover:text-stone-900 hover:bg-stone-100 transition-colors"
               title={soundEnabled ? 'Sound alerts on' : 'Sound alerts off'}
             >
               {soundEnabled ? <BellRing className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
@@ -175,33 +175,33 @@ export default function AdminQuotesPage() {
         {permissionError ? (
           <div className="bg-white border border-red-200 rounded-2xl p-8 text-center">
             <AlertTriangle className="w-8 h-8 text-red-400 mx-auto mb-4" />
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-2">Access denied</h3>
-            <p className="text-sm text-zinc-500 font-inter max-w-md mx-auto">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-2">Access denied</h3>
+            <p className="text-sm text-stone-500 font-inter max-w-md mx-auto">
               Your account ({user?.email}) is signed in but isn't marked as an admin yet. Ask the site owner to set
-              your Firestore <code className="bg-zinc-100 px-1.5 py-0.5 rounded">users/{'{uid}'}</code> document's{' '}
-              <code className="bg-zinc-100 px-1.5 py-0.5 rounded">role</code> field to{' '}
-              <code className="bg-zinc-100 px-1.5 py-0.5 rounded">"admin"</code> via the Firebase console.
+              your Firestore <code className="bg-stone-100 px-1.5 py-0.5 rounded">users/{'{uid}'}</code> document's{' '}
+              <code className="bg-stone-100 px-1.5 py-0.5 rounded">role</code> field to{' '}
+              <code className="bg-stone-100 px-1.5 py-0.5 rounded">"admin"</code> via the Firebase console.
             </p>
           </div>
         ) : requests.length === 0 ? (
-          <div className="bg-white border border-zinc-200 rounded-2xl p-12 text-center">
-            <Package className="w-8 h-8 text-zinc-300 mx-auto mb-4" />
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-1">No quote requests yet</h3>
-            <p className="text-sm text-zinc-500 font-inter">
+          <div className="bg-white border border-stone-200 rounded-2xl p-12 text-center">
+            <Package className="w-8 h-8 text-stone-300 mx-auto mb-4" />
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-1">No quote requests yet</h3>
+            <p className="text-sm text-stone-500 font-inter">
               New requests submitted from the "Add to Quote" cart on the site will appear here in real time.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
             {requests.map((r) => (
-              <div key={r.id} className="bg-white border border-zinc-200 rounded-2xl p-5">
+              <div key={r.id} className="bg-white border border-stone-200 rounded-2xl p-5">
                 <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
                   <div>
-                    <h4 className="font-outfit font-semibold text-zinc-900">{r.customerName || 'Not provided'}</h4>
+                    <h4 className="font-outfit font-semibold text-stone-900">{r.customerName || 'Not provided'}</h4>
                     {r.customerPhone && r.customerPhone !== 'Not provided' && (
                       <a
                         href={`tel:${r.customerPhone}`}
-                        className="text-sm text-zinc-500 font-inter flex items-center gap-1.5 mt-0.5 hover:text-amber-600"
+                        className="text-sm text-stone-500 font-inter flex items-center gap-1.5 mt-0.5 hover:text-brass-600"
                       >
                         <Phone className="w-3.5 h-3.5" /> {r.customerPhone}
                       </a>
@@ -216,21 +216,21 @@ export default function AdminQuotesPage() {
                   </span>
                 </div>
 
-                <div className="border-t border-zinc-100 pt-3 mb-3">
+                <div className="border-t border-stone-100 pt-3 mb-3">
                   <ul className="space-y-1.5">
                     {(r.items || []).map((item, idx) => (
-                      <li key={idx} className="text-sm font-inter text-zinc-700 flex items-center justify-between">
+                      <li key={idx} className="text-sm font-inter text-stone-700 flex items-center justify-between">
                         <span>
-                          {item.name} <span className="text-zinc-400">— {item.brand}</span>
+                          {item.name} <span className="text-stone-400">— {item.brand}</span>
                         </span>
-                        <span className="text-zinc-500 font-outfit">x{item.qty}</span>
+                        <span className="text-stone-500 font-outfit">x{item.qty}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-zinc-400 font-inter flex items-center gap-1.5">
+                  <span className="text-xs text-stone-400 font-inter flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" />
                     {r.createdAt?.toDate ? r.createdAt.toDate().toLocaleString('en-IN') : '—'}
                   </span>
@@ -246,7 +246,7 @@ export default function AdminQuotesPage() {
                     {r.status !== 'closed' && (
                       <button
                         onClick={() => markStatus(r.id, 'closed')}
-                        className="text-xs font-outfit font-medium px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-colors"
+                        className="text-xs font-outfit font-medium px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors"
                       >
                         Close
                       </button>

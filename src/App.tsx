@@ -19,8 +19,8 @@ const AdminProductFormPage = React.lazy(() => import('./pages/admin/AdminProduct
 
 // --- FLOATING ACTION BUTTONS ---
 const AdminLoadingFallback = () => (
-  <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-    <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+  <div className="min-h-screen bg-stone-950 flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-brass-500 border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
@@ -51,7 +51,7 @@ const FloatingActions = () => {
         href={`tel:+91${SITE_CONFIG.primaryPhone}`}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="w-14 h-14 bg-amber-500 text-zinc-950 rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:bg-amber-400 transition-all group relative lg:hidden"
+        className="w-14 h-14 bg-brass-500 text-stone-950 rounded-full flex items-center justify-center shadow-xl hover:scale-110 hover:bg-brass-400 transition-all group relative lg:hidden"
       >
         <Phone className="w-6 h-6" />
         <span className="absolute right-full mr-4 bg-black text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap font-outfit">
@@ -102,7 +102,7 @@ export default function App() {
       <QuoteProvider>
         <ProductsProvider>
               <BrowserRouter>
-          <div className="w-full min-h-screen overflow-x-hidden font-inter flex flex-col selection:bg-amber-500/30">
+          <div className="w-full min-h-screen overflow-x-hidden font-inter flex flex-col selection:bg-brass-500/30">
             <AnimatedRoutes hasBootAnimationPlayed={hasBootAnimationPlayed} setHasBootAnimationPlayed={setHasBootAnimationPlayed} />
 
             <FloatingActions />

@@ -1,25 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap');
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------
+   Abhishek Ply & Hardware — design tokens
+   A materials-and-craft palette: warm walnut darks, aged brass accents,
+   a single burnt-rust signature color reserved for primary actions only.
+   Deliberately not the cream/terracotta/serif AI-default combination.
+--------------------------------------------------------------------- */
+@theme {
+  --color-paper: #F1EAD9;
+  --color-paper-dim: #E8DFC9;
+
+  --color-espresso-50: #F6F1EA;
+  --color-espresso-100: #E8DCC8;
+  --color-espresso-200: #CDB794;
+  --color-espresso-300: #A9895F;
+  --color-espresso-400: #7C5F3F;
+  --color-espresso-500: #5C4530;
+  --color-espresso-600: #43331F;
+  --color-espresso-700: #362A1B;
+  --color-espresso-800: #2A2016;
+  --color-espresso-900: #201811;
+  --color-espresso-950: #15100B;
+
+  --color-brass-50: #FBF7EE;
+  --color-brass-100: #F3E7CC;
+  --color-brass-200: #E6CE9C;
+  --color-brass-300: #D6B172;
+  --color-brass-400: #C2984F;
+  --color-brass-500: #AD8342;
+  --color-brass-600: #8C6935;
+  --color-brass-700: #6C512A;
+  --color-brass-800: #503C21;
+  --color-brass-900: #3A2C1A;
+  --color-brass-950: #241B10;
+
+  --color-rust-50: #FBEEE9;
+  --color-rust-500: #B85C3C;
+  --color-rust-600: #9C4930;
+  --color-rust-700: #7D3A26;
+}
+
 :root {
-  --gold: #d97706; /* amber-600 */
-  --gold-light: #f59e0b; /* amber-500 */
-  --wood-dark: #3f2e23;
+  --gold: var(--color-brass-600);
+  --gold-light: var(--color-brass-500);
+  --wood-dark: var(--color-espresso-800);
 }
 
 body {
-  background-color: #fafafa; /* zinc-50 */
-  color: #09090b; /* zinc-950 */
+  background-color: var(--color-paper);
+  color: var(--color-espresso-950);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, .font-serif {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
 }
 
 .font-outfit {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* Hide scrollbar for seamless cinematic feel */
@@ -29,7 +70,7 @@ h1, h2, h3, h4, h5, h6, .font-serif {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #fef3c7 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--color-brass-200) 0%, var(--color-brass-600) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -38,5 +79,24 @@ h1, h2, h3, h4, h5, h6, .font-serif {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(173, 131, 66, 0.3);
+}
+
+/* ---------------------------------------------------------------------
+   Signature motif: cross-ply layers. A stack of alternating veneer bands,
+   the single most literal image in this business's world. Used sparingly
+   as a graphic device (hero, dividers) rather than a decorative pattern.
+--------------------------------------------------------------------- */
+.ply-layers {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-espresso-300) 0px,
+    var(--color-espresso-300) 3px,
+    var(--color-brass-200) 3px,
+    var(--color-brass-200) 5px,
+    var(--color-espresso-400) 5px,
+    var(--color-espresso-400) 7px,
+    var(--color-brass-100) 7px,
+    var(--color-brass-100) 9px
+  );
 }

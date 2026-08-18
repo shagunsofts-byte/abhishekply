@@ -64,25 +64,25 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           {/* Header */}
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-6 flex items-center justify-between border-b border-zinc-100"
+            className="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-6 flex items-center justify-between border-b border-stone-100"
           >
             <div className="flex-1 flex items-center gap-4">
-              <Search className="w-6 h-6 text-zinc-400 shrink-0" />
+              <Search className="w-6 h-6 text-stone-400 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search products, brands, categories..."
-                className="w-full bg-transparent border-none outline-none text-2xl md:text-4xl font-serif text-zinc-900 placeholder:text-zinc-300"
+                className="w-full bg-transparent border-none outline-none text-2xl md:text-4xl font-serif text-stone-900 placeholder:text-stone-300"
               />
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="p-3 hover:bg-zinc-100 rounded-full transition-colors shrink-0"
+              className="p-3 hover:bg-stone-100 rounded-full transition-colors shrink-0"
             >
-              <X className="w-6 h-6 text-zinc-900" />
+              <X className="w-6 h-6 text-stone-900" />
             </button>
           </form>
 
@@ -91,13 +91,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             {query.trim() ? (
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xs font-outfit uppercase tracking-widest text-zinc-400">
+                  <h3 className="text-xs font-outfit uppercase tracking-widest text-stone-400">
                     {results.length > 0 ? `${results.length} result${results.length !== 1 ? 's' : ''}` : 'No matches yet'}
                   </h3>
                   {results.length > 0 && (
                     <button
                       onClick={handleSubmit}
-                      className="text-sm font-outfit font-medium text-amber-600 hover:text-amber-700 flex items-center gap-1"
+                      className="text-sm font-outfit font-medium text-brass-600 hover:text-brass-700 flex items-center gap-1"
                     >
                       View all in Products <ArrowRight className="w-3.5 h-3.5" />
                     </button>
@@ -108,23 +108,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {results.map((p) => (
                       <Link key={p.id} to={`/product/${p.slug}`} onClick={onClose} className="group block">
-                        <div className="w-full aspect-square bg-zinc-50 rounded-2xl overflow-hidden mb-3 relative">
+                        <div className="w-full aspect-square bg-stone-50 rounded-2xl overflow-hidden mb-3 relative">
                           <img
                             src={p.thumbnail}
                             alt={p.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
-                        <span className="text-[11px] font-outfit uppercase tracking-widest text-amber-600">{p.brand}</span>
-                        <h4 className="font-outfit font-medium text-zinc-900 group-hover:text-amber-600 transition-colors leading-snug">
+                        <span className="text-[11px] font-outfit uppercase tracking-widest text-brass-600">{p.brand}</span>
+                        <h4 className="font-outfit font-medium text-stone-900 group-hover:text-brass-600 transition-colors leading-snug">
                           {p.name}
                         </h4>
                       </Link>
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-zinc-50 border border-zinc-200 rounded-2xl p-8 text-center">
-                    <p className="text-zinc-500 font-inter mb-4">
+                  <div className="bg-stone-50 border border-stone-200 rounded-2xl p-8 text-center">
+                    <p className="text-stone-500 font-inter mb-4">
                       Nothing matched "{query}" in our online catalog yet — our full range is bigger than this site.
                     </p>
                     <a
@@ -143,15 +143,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                 {/* Left Column */}
                 <div className="space-y-12">
                   <div>
-                    <h3 className="text-xs font-outfit uppercase tracking-widest text-zinc-400 mb-4">Popular Searches</h3>
+                    <h3 className="text-xs font-outfit uppercase tracking-widest text-stone-400 mb-4">Popular Searches</h3>
                     <ul className="space-y-2">
                       {popularSearches.map((search, idx) => (
                         <li key={idx}>
                           <button
                             onClick={() => setQuery(search)}
-                            className="flex items-center gap-3 text-zinc-600 hover:text-amber-600 transition-colors py-2 group w-full text-left"
+                            className="flex items-center gap-3 text-stone-600 hover:text-brass-600 transition-colors py-2 group w-full text-left"
                           >
-                            <Search className="w-4 h-4 text-zinc-400 group-hover:text-amber-600" />
+                            <Search className="w-4 h-4 text-stone-400 group-hover:text-brass-600" />
                             <span className="font-inter text-lg">{search}</span>
                           </button>
                         </li>
@@ -160,14 +160,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                   </div>
 
                   <div>
-                    <h3 className="text-xs font-outfit uppercase tracking-widest text-zinc-400 mb-4">Popular Categories</h3>
+                    <h3 className="text-xs font-outfit uppercase tracking-widest text-stone-400 mb-4">Popular Categories</h3>
                     <div className="flex flex-wrap gap-3">
                       {popularCategories.map((cat) => (
                         <Link
                           key={cat.slug}
                           to={`/products/${cat.slug}`}
                           onClick={onClose}
-                          className="px-6 py-3 rounded-full border border-zinc-200 text-zinc-700 hover:border-amber-500 hover:text-amber-600 font-outfit transition-all hover:shadow-lg hover:shadow-amber-500/10"
+                          className="px-6 py-3 rounded-full border border-stone-200 text-stone-700 hover:border-brass-500 hover:text-brass-600 font-outfit transition-all hover:shadow-lg hover:shadow-brass-500/10"
                         >
                           {cat.icon} {cat.name}
                         </Link>
@@ -178,21 +178,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
                 {/* Right Column: Featured Products */}
                 <div>
-                  <h3 className="text-xs font-outfit uppercase tracking-widest text-zinc-400 mb-6">Trending Now</h3>
+                  <h3 className="text-xs font-outfit uppercase tracking-widest text-stone-400 mb-6">Trending Now</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {PRODUCTS.filter((p) => p.isFeatured).slice(0, 2).map((p) => (
                       <Link key={p.id} to={`/product/${p.slug}`} onClick={onClose} className="group block">
-                        <div className="w-full aspect-square bg-zinc-50 rounded-2xl overflow-hidden mb-4 relative">
+                        <div className="w-full aspect-square bg-stone-50 rounded-2xl overflow-hidden mb-4 relative">
                           <img
                             src={p.thumbnail}
                             alt={p.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
-                        <h4 className="font-outfit font-medium text-zinc-900 group-hover:text-amber-600 transition-colors">
+                        <h4 className="font-outfit font-medium text-stone-900 group-hover:text-brass-600 transition-colors">
                           {p.name}
                         </h4>
-                        <p className="text-sm text-zinc-500 font-inter flex items-center gap-1 mt-1 group-hover:text-zinc-700">
+                        <p className="text-sm text-stone-500 font-inter flex items-center gap-1 mt-1 group-hover:text-stone-700">
                           Explore <ArrowRight className="w-3 h-3" />
                         </p>
                       </Link>

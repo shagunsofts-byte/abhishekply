@@ -80,16 +80,16 @@ export default function CatalogPage() {
         title={`${heading} | Abhishek Ply & Hardware`}
         description={description}
       />
-      <main className="relative w-full min-h-screen bg-zinc-50 text-zinc-950 pt-24">
+      <main className="relative w-full min-h-screen bg-stone-50 text-stone-950 pt-24">
         {/* Category hero banner */}
         <section className="relative w-full h-[42vh] min-h-[280px] max-h-[420px] overflow-hidden">
           <img src={heroImage} alt={heading} className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/50 to-zinc-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/50 to-stone-950/20" />
           <div className="relative z-10 h-full flex flex-col justify-end px-4 md:px-8 lg:px-12 pb-10 max-w-7xl mx-auto w-full">
-            <nav className="text-xs font-outfit text-zinc-300 mb-3 flex items-center gap-2">
-              <Link to="/" className="hover:text-amber-400 transition-colors">Home</Link>
+            <nav className="text-xs font-outfit text-stone-300 mb-3 flex items-center gap-2">
+              <Link to="/" className="hover:text-brass-400 transition-colors">Home</Link>
               <span>/</span>
-              <Link to="/products" className="hover:text-amber-400 transition-colors">Products</Link>
+              <Link to="/products" className="hover:text-brass-400 transition-colors">Products</Link>
               {activeCategoryMeta && (
                 <>
                   <span>/</span>
@@ -106,7 +106,7 @@ export default function CatalogPage() {
               {activeCategoryMeta?.icon && <span>{activeCategoryMeta.icon}</span>}
               {heading}
             </motion.h1>
-            <p className="text-zinc-200 font-inter max-w-2xl text-sm md:text-base leading-relaxed">
+            <p className="text-stone-200 font-inter max-w-2xl text-sm md:text-base leading-relaxed">
               {description}
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function CatalogPage() {
             <Link
               to="/products"
               className={`px-4 py-2 rounded-full text-sm font-outfit font-medium border transition-colors ${
-                !category ? 'bg-zinc-900 text-white border-zinc-900' : 'bg-white text-zinc-600 border-zinc-200 hover:border-amber-400 hover:text-amber-600'
+                !category ? 'bg-stone-900 text-white border-stone-900' : 'bg-white text-stone-600 border-stone-200 hover:border-brass-400 hover:text-brass-600'
               }`}
             >
               All
@@ -128,7 +128,7 @@ export default function CatalogPage() {
                 key={c.slug}
                 to={`/products/${c.slug}`}
                 className={`px-4 py-2 rounded-full text-sm font-outfit font-medium border transition-colors flex items-center gap-1.5 ${
-                  category === c.slug ? 'bg-zinc-900 text-white border-zinc-900' : 'bg-white text-zinc-600 border-zinc-200 hover:border-amber-400 hover:text-amber-600'
+                  category === c.slug ? 'bg-stone-900 text-white border-stone-900' : 'bg-white text-stone-600 border-stone-200 hover:border-brass-400 hover:text-brass-600'
                 }`}
               >
                 <span>{c.icon}</span> {c.name}
@@ -141,14 +141,14 @@ export default function CatalogPage() {
             <aside className="hidden lg:block w-64 shrink-0">
               <div className="sticky top-28 space-y-8">
                 <div>
-                  <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-zinc-400 mb-4">Brand</h4>
+                  <h4 className="font-outfit font-semibold uppercase tracking-widest text-xs text-stone-400 mb-4">Brand</h4>
                   <div className="flex flex-col gap-2">
                     {BRANDS.map((b) => (
                       <button
                         key={b}
                         onClick={() => updateParam('brand', brandParam === b ? null : b)}
                         className={`text-left text-sm font-inter px-3 py-2 rounded-xl transition-colors ${
-                          normalize(brandParam) === normalize(b) ? 'bg-amber-50 text-amber-700 font-medium' : 'text-zinc-600 hover:bg-zinc-100'
+                          normalize(brandParam) === normalize(b) ? 'bg-brass-50 text-brass-700 font-medium' : 'text-stone-600 hover:bg-stone-100'
                         }`}
                       >
                         {b}
@@ -157,7 +157,7 @@ export default function CatalogPage() {
                   </div>
                 </div>
                 {hasActiveFilters && (
-                  <button onClick={clearAll} className="text-sm font-outfit text-zinc-500 hover:text-amber-600 flex items-center gap-1.5 transition-colors">
+                  <button onClick={clearAll} className="text-sm font-outfit text-stone-500 hover:text-brass-600 flex items-center gap-1.5 transition-colors">
                     <X className="w-3.5 h-3.5" /> Clear all filters
                   </button>
                 )}
@@ -166,10 +166,10 @@ export default function CatalogPage() {
 
             {/* Mobile filter toggle */}
             <div className="lg:hidden flex items-center justify-between mb-2">
-              <span className="text-sm font-outfit text-zinc-500">{filtered.length} product{filtered.length !== 1 ? 's' : ''}</span>
+              <span className="text-sm font-outfit text-stone-500">{filtered.length} product{filtered.length !== 1 ? 's' : ''}</span>
               <button
                 onClick={() => setFiltersOpen(true)}
-                className="flex items-center gap-2 text-sm font-outfit font-medium px-4 py-2 rounded-full border border-zinc-200 bg-white"
+                className="flex items-center gap-2 text-sm font-outfit font-medium px-4 py-2 rounded-full border border-stone-200 bg-white"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" /> Filter by brand
               </button>
@@ -181,7 +181,7 @@ export default function CatalogPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-[130] bg-zinc-950/50 backdrop-blur-sm lg:hidden"
+                  className="fixed inset-0 z-[130] bg-stone-950/50 backdrop-blur-sm lg:hidden"
                   onClick={() => setFiltersOpen(false)}
                 >
                   <motion.div
@@ -194,7 +194,7 @@ export default function CatalogPage() {
                   >
                     <div className="flex items-center justify-between mb-6">
                       <h3 className="font-serif text-xl font-bold">Filter by Brand</h3>
-                      <button onClick={() => setFiltersOpen(false)}><X className="w-5 h-5 text-zinc-500" /></button>
+                      <button onClick={() => setFiltersOpen(false)}><X className="w-5 h-5 text-stone-500" /></button>
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       {BRANDS.map((b) => (
@@ -202,7 +202,7 @@ export default function CatalogPage() {
                           key={b}
                           onClick={() => { updateParam('brand', brandParam === b ? null : b); setFiltersOpen(false); }}
                           className={`text-left text-sm font-inter px-3 py-2.5 rounded-xl border transition-colors ${
-                            normalize(brandParam) === normalize(b) ? 'bg-amber-50 border-amber-300 text-amber-700 font-medium' : 'border-zinc-200 text-zinc-600'
+                            normalize(brandParam) === normalize(b) ? 'bg-brass-50 border-brass-300 text-brass-700 font-medium' : 'border-stone-200 text-stone-600'
                           }`}
                         >
                           {b}
@@ -217,10 +217,10 @@ export default function CatalogPage() {
             {/* Product grid */}
             <div className="flex-1">
               {hasActiveFilters && (
-                <div className="hidden lg:flex items-center gap-2 mb-6 text-sm font-outfit text-zinc-500">
+                <div className="hidden lg:flex items-center gap-2 mb-6 text-sm font-outfit text-stone-500">
                   {filtered.length} product{filtered.length !== 1 ? 's' : ''} found
                   {brandParam && (
-                    <span className="bg-zinc-100 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span className="bg-stone-100 px-3 py-1 rounded-full flex items-center gap-1.5">
                       {brandParam} <X className="w-3 h-3 cursor-pointer" onClick={() => updateParam('brand', null)} />
                     </span>
                   )}
@@ -235,11 +235,11 @@ export default function CatalogPage() {
                 </div>
               ) : (
                 <div>
-                  <div className="bg-white border border-zinc-200 rounded-3xl p-8 md:p-12 text-center mb-12">
-                    <h3 className="font-serif text-2xl font-bold text-zinc-900 mb-3">
+                  <div className="bg-white border border-stone-200 rounded-3xl p-8 md:p-12 text-center mb-12">
+                    <h3 className="font-serif text-2xl font-bold text-stone-900 mb-3">
                       We don't have an exact match online yet
                     </h3>
-                    <p className="text-zinc-500 font-inter max-w-xl mx-auto mb-6 leading-relaxed">
+                    <p className="text-stone-500 font-inter max-w-xl mx-auto mb-6 leading-relaxed">
                       Our full range is larger than what's listed here — message us on WhatsApp with what you're
                       looking for and we'll get you pricing, samples and availability directly.
                     </p>
@@ -257,7 +257,7 @@ export default function CatalogPage() {
 
                   {fallbackList.length > 0 && (
                     <>
-                      <h4 className="font-serif text-xl font-bold text-zinc-900 mb-6">You might also like</h4>
+                      <h4 className="font-serif text-xl font-bold text-stone-900 mb-6">You might also like</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                         {fallbackList.map((p, i) => (
                           <ProductCard key={p.id} product={p} index={i} />

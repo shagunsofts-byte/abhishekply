@@ -122,20 +122,20 @@ export default function AdminProductFormPage() {
 
   if (user === undefined || loading) {
     return (
-      <main className="min-h-screen bg-zinc-50 flex items-center justify-center">
-        <RefreshCw className="w-6 h-6 text-zinc-400 animate-spin" />
+      <main className="min-h-screen bg-stone-50 flex items-center justify-center">
+        <RefreshCw className="w-6 h-6 text-stone-400 animate-spin" />
       </main>
     );
   }
 
   if (notFound) {
     return (
-      <main className="min-h-screen bg-zinc-50">
+      <main className="min-h-screen bg-stone-50">
         <AdminNavBar user={user} title="Edit Product" />
         <div className="max-w-2xl mx-auto px-6 py-16 text-center">
           <AlertTriangle className="w-8 h-8 text-red-400 mx-auto mb-4" />
-          <h3 className="font-serif text-lg font-bold text-zinc-900 mb-2">Product not found</h3>
-          <Link to="/admin/products" className="text-amber-600 hover:text-amber-700 text-sm font-outfit font-medium">
+          <h3 className="font-serif text-lg font-bold text-stone-900 mb-2">Product not found</h3>
+          <Link to="/admin/products" className="text-brass-600 hover:text-brass-700 text-sm font-outfit font-medium">
             Back to Products
           </Link>
         </div>
@@ -144,52 +144,52 @@ export default function AdminProductFormPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-50 pb-20">
+    <main className="min-h-screen bg-stone-50 pb-20">
       <AdminNavBar user={user} title={isEditMode ? 'Edit Product' : 'Add Product'} />
 
       <div className="max-w-3xl mx-auto px-6 py-8">
-        <Link to="/admin/products" className="inline-flex items-center gap-1.5 text-sm font-outfit text-zinc-500 hover:text-zinc-900 mb-6 transition-colors">
+        <Link to="/admin/products" className="inline-flex items-center gap-1.5 text-sm font-outfit text-stone-500 hover:text-stone-900 mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Products
         </Link>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Info */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Basic Info</h3>
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Basic Info</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Product Name *</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Product Name *</label>
                 <input
                   required
                   type="text"
                   value={form.name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="CenturyPly Club Prime BWP Plywood"
                 />
               </div>
               <div className="sm:col-span-2">
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">
-                  URL Slug * <span className="text-zinc-400">(used in the product's web address)</span>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">
+                  URL Slug * <span className="text-stone-400">(used in the product's web address)</span>
                 </label>
                 <input
                   required
                   type="text"
                   value={form.slug}
                   onChange={(e) => { setSlugTouched(true); update('slug', slugify(e.target.value)); }}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400 font-mono"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400 font-mono"
                   placeholder="centuryply-club-prime-bwp-plywood"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Brand *</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Brand *</label>
                 <input
                   required
                   type="text"
                   list="brand-options"
                   value={form.brand}
                   onChange={(e) => update('brand', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="CenturyPly"
                 />
                 <datalist id="brand-options">
@@ -197,7 +197,7 @@ export default function AdminProductFormPage() {
                 </datalist>
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Category *</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Category *</label>
                 <select
                   required
                   value={form.categorySlug}
@@ -207,7 +207,7 @@ export default function AdminProductFormPage() {
                     update('categorySlug', slug);
                     if (meta) update('category', meta.name);
                   }}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400 bg-white"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400 bg-white"
                 >
                   {categoriesData.map((c) => (
                     <option key={c.slug} value={c.slug}>{c.icon} {c.name}</option>
@@ -215,24 +215,24 @@ export default function AdminProductFormPage() {
                 </select>
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Subcategory</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Subcategory</label>
                 <input
                   type="text"
                   value={form.subcategory || ''}
                   onChange={(e) => update('subcategory', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="BWP Grade Plywood"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">
-                  Type <span className="text-zinc-400">(matches the menu filter, e.g. "bwp")</span>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">
+                  Type <span className="text-stone-400">(matches the menu filter, e.g. "bwp")</span>
                 </label>
                 <input
                   type="text"
                   value={form.type || ''}
                   onChange={(e) => update('type', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="bwp"
                 />
               </div>
@@ -240,27 +240,27 @@ export default function AdminProductFormPage() {
           </section>
 
           {/* Description */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Description</h3>
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Description</h3>
             <div className="space-y-4">
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Short Description</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Short Description</label>
                 <input
                   type="text"
                   value={form.shortDescription || ''}
                   onChange={(e) => update('shortDescription', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="One line shown on product cards"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Full Description *</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Full Description *</label>
                 <textarea
                   required
                   value={form.description}
                   onChange={(e) => update('description', e.target.value)}
                   rows={4}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400 resize-none"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400 resize-none"
                   placeholder="Shown on the product detail page"
                 />
               </div>
@@ -268,31 +268,31 @@ export default function AdminProductFormPage() {
           </section>
 
           {/* Images */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Images (Cloudinary URLs)</h3>
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Images (Cloudinary URLs)</h3>
             <ImageUrlListInput images={form.images.length ? form.images : ['']} onChange={(images) => update('images', images)} />
           </section>
 
           {/* Pricing & Availability */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Pricing & Availability</h3>
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Pricing & Availability</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Price Label</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Price Label</label>
                 <input
                   type="text"
                   value={form.priceLabel || ''}
                   onChange={(e) => update('priceLabel', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="Enquire for Price"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Availability</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Availability</label>
                 <select
                   value={form.availability || 'In Stock'}
                   onChange={(e) => update('availability', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400 bg-white"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400 bg-white"
                 >
                   <option>In Stock</option>
                   <option>Made to Order</option>
@@ -306,12 +306,12 @@ export default function AdminProductFormPage() {
                 ['isNew', 'New'],
                 ['isPopular', 'Popular'],
               ] as const).map(([key, label]) => (
-                <label key={key} className="flex items-center gap-2 text-sm font-inter text-zinc-700 cursor-pointer">
+                <label key={key} className="flex items-center gap-2 text-sm font-inter text-stone-700 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={!!form[key]}
                     onChange={(e) => update(key, e.target.checked as any)}
-                    className="w-4 h-4 rounded accent-amber-500"
+                    className="w-4 h-4 rounded accent-brass-500"
                   />
                   {label}
                 </label>
@@ -320,73 +320,73 @@ export default function AdminProductFormPage() {
           </section>
 
           {/* Specs */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Attributes</h3>
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Attributes</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Sizes <span className="text-zinc-400">(comma separated)</span></label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Sizes <span className="text-stone-400">(comma separated)</span></label>
                 <input
                   type="text"
                   value={toCsv(form.sizes)}
                   onChange={(e) => update('sizes', fromCsv(e.target.value))}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="6mm, 9mm, 12mm, 18mm"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Colours <span className="text-zinc-400">(comma separated)</span></label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Colours <span className="text-stone-400">(comma separated)</span></label>
                 <input
                   type="text"
                   value={toCsv(form.colors)}
                   onChange={(e) => update('colors', fromCsv(e.target.value))}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="White, Ivory, Walnut"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Finish</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Finish</label>
                 <input
                   type="text"
                   value={form.finish || ''}
                   onChange={(e) => update('finish', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                 />
               </div>
               <div>
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Material</label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Material</label>
                 <input
                   type="text"
                   value={form.material || ''}
                   onChange={(e) => update('material', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                 />
               </div>
               <div className="sm:col-span-2">
-                <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">Key Features <span className="text-zinc-400">(comma separated)</span></label>
+                <label className="text-xs font-outfit text-stone-500 mb-1.5 block">Key Features <span className="text-stone-400">(comma separated)</span></label>
                 <input
                   type="text"
                   value={toCsv(form.features)}
                   onChange={(e) => update('features', fromCsv(e.target.value))}
-                  className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
                   placeholder="Boiling water resistant, Borer & termite proof"
                 />
               </div>
             </div>
-            <label className="text-xs font-outfit text-zinc-500 mb-2 block">Specifications</label>
+            <label className="text-xs font-outfit text-stone-500 mb-2 block">Specifications</label>
             <KeyValueListInput value={form.specifications || {}} onChange={(v) => update('specifications', v)} />
           </section>
 
           {/* WhatsApp */}
-          <section className="bg-white border border-zinc-200 rounded-2xl p-6">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 mb-5">Enquiry Message</h3>
-            <label className="text-xs font-outfit text-zinc-500 mb-1.5 block">
+          <section className="bg-white border border-stone-200 rounded-2xl p-6">
+            <h3 className="font-serif text-lg font-bold text-stone-900 mb-5">Enquiry Message</h3>
+            <label className="text-xs font-outfit text-stone-500 mb-1.5 block">
               Pre-filled WhatsApp message when a customer enquires about this product
             </label>
             <textarea
               value={form.whatsappMessage || ''}
               onChange={(e) => update('whatsappMessage', e.target.value)}
               rows={2}
-              className="w-full px-3 py-2.5 rounded-xl border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400 resize-none"
+              className="w-full px-3 py-2.5 rounded-xl border border-stone-200 text-sm font-inter outline-none focus:border-brass-400 resize-none"
               placeholder={`Hi, I am interested in ${form.name || 'this product'}. Please share more details.`}
             />
           </section>
@@ -401,13 +401,13 @@ export default function AdminProductFormPage() {
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 bg-zinc-900 hover:bg-amber-600 disabled:opacity-60 text-white px-6 py-3 rounded-full font-outfit font-medium transition-colors"
+              className="flex items-center gap-2 bg-stone-900 hover:bg-brass-600 disabled:opacity-60 text-white px-6 py-3 rounded-full font-outfit font-medium transition-colors"
             >
               <Save className="w-4 h-4" /> {saving ? 'Saving…' : isEditMode ? 'Save Changes' : 'Create Product'}
             </button>
             <Link
               to="/admin/products"
-              className="px-6 py-3 rounded-full font-outfit font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
+              className="px-6 py-3 rounded-full font-outfit font-medium text-stone-500 hover:text-stone-900 transition-colors"
             >
               Cancel
             </Link>

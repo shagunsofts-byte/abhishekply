@@ -1,20 +1,138 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+
+# ABHISHEK PLY & HARDWARE
+
+### Premium Plywood, Laminates, Doors & Hardware
+
+A modern digital product catalogue and quotation request platform  
+developed and maintained by **Shreeji Infosys**.
+
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## About the Project
 
-View your app in AI Studio: https://ai.studio/apps/182d1ed7-98a8-4805-a02d-f3cd3dfde75b
+**Abhishek Ply & Hardware** is a modern digital catalogue platform designed to showcase premium building and interior products in a clean and professional way.
 
-## Run Locally
+Customers can:
 
-**Prerequisites:**  Node.js
+- Browse products by category
+- Explore product details and specifications
+- Select products for quotation
+- Build a custom quote list
+- Submit quotation requests without creating an account
+- Contact the business through WhatsApp or phone
 
+The platform is designed to provide a smooth, premium, and user-friendly digital store experience.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+## Product Categories
+
+- Plywood
+- Laminates
+- Doors
+- Hardware
+- Interior Products
+
+---
+
+## Key Features
+
+- Premium responsive UI
+- Product catalogue with categories
+- Product detail pages
+- Image preview support
+- Quote / Enquiry system
+- Guest quotation requests
+- No customer login required
+- Firebase-powered data management
+- Admin dashboard
+- Quote request management
+- WhatsApp integration
+- Mobile-friendly design
+
+---
+
+## Technology Stack
+
+- React
+- TypeScript
+- Vite
+- Firebase
+- Firebase Firestore
+- Firebase Storage
+- Modern CSS / Tailwind CSS
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+- Node.js
+- npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create your environment configuration file and add the required Firebase configuration:
+
+```env
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## Project Management
+
+This project is developed and maintained by:
+
+### Shreeji Infosys
+
+**Software • Websites • Digital Solutions**
+
+Website: https://shreejiinfosys.com
+
+---
+
+## Developer
+
+**Ajay**  
+Software Engineer & Web Developer  
+Shreeji Infosys
+
+---
+
+<div align="center">
+
+© 2026 Shreeji Infosys. All Rights Reserved.
+
+Built with ❤️ by **Shreeji Infosys**
+
+</div>

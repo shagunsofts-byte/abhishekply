@@ -31,19 +31,19 @@ export const KeyValueListInput: React.FC<KeyValueListInputProps> = ({ value, onC
             value={key}
             onChange={(e) => updateRow(idx, e.target.value, val)}
             placeholder="Grade"
-            className="w-1/3 px-3 py-2 rounded-lg border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+            className="w-1/3 px-3 py-2 rounded-lg border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
           />
           <input
             type="text"
             value={val}
             onChange={(e) => updateRow(idx, key, e.target.value)}
             placeholder="BWP (IS:710)"
-            className="flex-1 px-3 py-2 rounded-lg border border-zinc-200 text-sm font-inter outline-none focus:border-amber-400"
+            className="flex-1 px-3 py-2 rounded-lg border border-stone-200 text-sm font-inter outline-none focus:border-brass-400"
           />
           <button
             type="button"
             onClick={() => removeRow(idx)}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-400 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-stone-400 hover:text-red-500 hover:bg-red-50 transition-colors shrink-0"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -52,7 +52,7 @@ export const KeyValueListInput: React.FC<KeyValueListInputProps> = ({ value, onC
       <button
         type="button"
         onClick={addRow}
-        className="flex items-center gap-1.5 text-xs font-outfit font-medium text-amber-600 hover:text-amber-700 transition-colors"
+        className="flex items-center gap-1.5 text-xs font-outfit font-medium text-brass-600 hover:text-brass-700 transition-colors"
       >
         <Plus className="w-3.5 h-3.5" /> Add Specification
       </button>

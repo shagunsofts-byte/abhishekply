@@ -36,7 +36,7 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-0 left-0 w-full bg-white text-zinc-900 shadow-2xl border-t border-zinc-200 z-[110]"
+          className="absolute top-0 left-0 w-full bg-white text-stone-900 shadow-2xl border-t border-stone-200 z-[110]"
           onMouseLeave={onMouseLeave}
           onMouseEnter={onMouseEnter}
         >
@@ -65,13 +65,13 @@ export const DesktopMegaMenu: React.FC<DesktopMegaMenuProps> = ({
                   className="flex flex-col"
                   onMouseEnter={() => setHoveredCategory(category.id)}
                 >
-                  <h3 className={`font-serif text-lg font-bold mb-6 transition-colors duration-300 ${hoveredCategory === category.id ? 'text-amber-600' : 'text-zinc-900'}`}>
+                  <h3 className={`font-serif text-lg font-bold mb-6 transition-colors duration-300 ${hoveredCategory === category.id ? 'text-brass-600' : 'text-stone-900'}`}>
                     {category.title}
                   </h3>
                   <ul className="space-y-1 font-inter -ml-4">
                     {category.subItems.map((item, idx) => (
                       <li key={idx}>
-                        <Link to={item.href} onClick={onMouseLeave} className="text-left text-zinc-700 hover:text-zinc-950 text-sm transition-all duration-300 block px-4 py-2.5 rounded-xl border border-transparent hover:border-[#ebdcf9] hover:bg-gradient-to-r hover:from-[#f4ebff] hover:to-[#ffedd5] hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.05)]">
+                        <Link to={item.href} onClick={onMouseLeave} className="text-left text-stone-700 hover:text-stone-950 text-sm transition-all duration-300 block px-4 py-2.5 rounded-xl border border-transparent hover:border-brass-200 hover:bg-brass-50 hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.08)]">
                           {item.label}
                         </Link>
                       </li>

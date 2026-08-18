@@ -44,11 +44,11 @@ export const FeaturedCollection = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12"
         >
-          <p className="text-xs text-zinc-400 uppercase tracking-widest mb-2">SIGNATURE COLLECTION</p>
+          <p className="text-xs text-stone-400 uppercase tracking-widest mb-2">SIGNATURE COLLECTION</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
-            The Art of <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-orange-600">Surfaces</span>
+            The Art of <span className="text-transparent bg-clip-text bg-gradient-to-r from-rust-600 to-brass-500">Surfaces</span>
           </h2>
-          <p className="text-lg text-zinc-300 mt-4 max-w-2xl mx-auto">
+          <p className="text-lg text-stone-300 mt-4 max-w-2xl mx-auto">
             Explore a handpicked selection of premium finishes, designed to bring unmatched character and depth to your interiors.
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export const FeaturedCollection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="text-sm font-medium text-zinc-300 font-outfit uppercase tracking-widest"
+                  className="text-sm font-medium text-stone-300 font-outfit uppercase tracking-widest"
                 >
                   {SWATCHES.find(s => s.id === hoveredSwatchId)?.name}
                 </motion.p>
@@ -98,7 +98,7 @@ export const FeaturedCollection = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="text-sm font-medium text-zinc-500 font-outfit uppercase tracking-widest"
+                  className="text-sm font-medium text-stone-500 font-outfit uppercase tracking-widest"
                 >
                   Select a shade
                 </motion.p>
