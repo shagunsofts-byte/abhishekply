@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { signOut, User } from 'firebase/auth';
-import { LogOut } from 'lucide-react';
+import { LogOut, Download, CheckCircle2 } from 'lucide-react';
 import { auth } from '../../firebase_config';
+import { useAdminInstallPrompt } from '../../hooks/useAdminInstallPrompt';
 
 interface AdminNavBarProps {
   user: User | null | undefined;
@@ -12,6 +13,7 @@ interface AdminNavBarProps {
 
 export const AdminNavBar: React.FC<AdminNavBarProps> = ({ user, title, right }) => {
   const location = useLocation();
+  const { canInstall, isStandalone, promptInstall } = useAdminInstallPrompt();
 
   const tabs = [
     { label: 'Quote Requests', to: '/admin/quotes' },
@@ -27,6 +29,19 @@ export const AdminNavBar: React.FC<AdminNavBarProps> = ({ user, title, right }) 
         </div>
         <div className="flex items-center gap-3">
           {right}
+          {canInstall && (
+            <button
+              onClick={promptInstall}
+              className="flex items-center gap-1.5 text-sm font-outfit font-medium px-3.5 py-1.5 rounded-full bg-espresso-950 text-brass-400 hover:bg-espresso-900 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5" /> Install App
+            </button>
+          )}
+          {isStandalone && (
+            <span className="flex items-center gap-1.5 text-xs font-outfit text-stone-400" title="Running as an installed app">
+              <CheckCircle2 className="w-3.5 h-3.5" /> App
+            </span>
+          )}
           <button
             onClick={() => signOut(auth)}
             className="flex items-center gap-1.5 text-sm font-outfit text-stone-500 hover:text-stone-900 transition-colors"

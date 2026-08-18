@@ -11,6 +11,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { QuoteProvider } from './context/QuoteContext';
 import { ProductsProvider } from './context/ProductsContext';
+import { AdminShell } from './components/admin/AdminShell';
 
 const AdminLoginPage = React.lazy(() => import('./pages/admin/AdminLoginPage'));
 const AdminQuotesPage = React.lazy(() => import('./pages/admin/AdminQuotesPage'));
@@ -82,11 +83,11 @@ const AnimatedRoutes = ({ hasBootAnimationPlayed, setHasBootAnimationPlayed }: a
         <Route path="/products/:category" element={<><Navbar /><CatalogPage /><Footer /></>} />
         <Route path="/catalog" element={<Navigate to="/products" replace />} />
         <Route path="/product/:slug" element={<><Navbar /><ProductDetailPage /><Footer /></>} />
-        <Route path="/admin/login" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminLoginPage /></React.Suspense>} />
-        <Route path="/admin/quotes" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminQuotesPage /></React.Suspense>} />
-        <Route path="/admin/products" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminProductsPage /></React.Suspense>} />
-        <Route path="/admin/products/new" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminProductFormPage /></React.Suspense>} />
-        <Route path="/admin/products/:slug/edit" element={<React.Suspense fallback={<AdminLoadingFallback />}><AdminProductFormPage /></React.Suspense>} />
+        <Route path="/admin/login" element={<AdminShell><React.Suspense fallback={<AdminLoadingFallback />}><AdminLoginPage /></React.Suspense></AdminShell>} />
+        <Route path="/admin/quotes" element={<AdminShell><React.Suspense fallback={<AdminLoadingFallback />}><AdminQuotesPage /></React.Suspense></AdminShell>} />
+        <Route path="/admin/products" element={<AdminShell><React.Suspense fallback={<AdminLoadingFallback />}><AdminProductsPage /></React.Suspense></AdminShell>} />
+        <Route path="/admin/products/new" element={<AdminShell><React.Suspense fallback={<AdminLoadingFallback />}><AdminProductFormPage /></React.Suspense></AdminShell>} />
+        <Route path="/admin/products/:slug/edit" element={<AdminShell><React.Suspense fallback={<AdminLoadingFallback />}><AdminProductFormPage /></React.Suspense></AdminShell>} />
         <Route path="*" element={<><Navbar /><NotFoundPage /><Footer /></>} />
         </Routes>
       </motion.div>

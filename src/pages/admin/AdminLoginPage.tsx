@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Lock, LogIn } from 'lucide-react';
+import { Lock, LogIn, Download, Share } from 'lucide-react';
 import { auth } from '../../firebase_config';
+import { useAdminInstallPrompt } from '../../hooks/useAdminInstallPrompt';
 
 export default function AdminLoginPage() {
   const navigate = useNavigate();
+  const { canInstall, isIos, isStandalone, promptInstall } = useAdminInstallPrompt();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -74,6 +76,24 @@ export default function AdminLoginPage() {
         <p className="text-center text-xs text-stone-600 font-inter mt-6">
           This area is restricted to store administrators.
         </p>
+
+        {!isStandalone && (canInstall || isIos) && (
+          <div className="mt-6 bg-stone-900 border border-stone-800 rounded-2xl p-4">
+            {canInstall && (
+              <button
+                onClick={promptInstall}
+                className="w-full flex items-center justify-center gap-2 text-sm font-outfit font-medium text-brass-400 hover:text-brass-300 transition-colors"
+              >
+                <Download className="w-4 h-4" /> Install this app on your device
+              </button>
+            )}
+            {isIos && (
+              <p className="flex items-center justify-center gap-2 text-xs font-inter text-stone-400 text-center">
+                <Share className="w-3.5 h-3.5 shrink-0" /> Tap Share, then "Add to Home Screen" to install
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </main>
   );
