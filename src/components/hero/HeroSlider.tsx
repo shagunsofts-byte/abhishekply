@@ -18,6 +18,7 @@ const SLIDES = [
     secondaryLabel: 'Browse Plywood',
     secondaryLink: '/products/plywood',
     swatch: 'plywood' as const,
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
   },
   {
     id: 2,
@@ -33,6 +34,7 @@ const SLIDES = [
     secondaryLabel: 'Explore Interiors',
     secondaryLink: '/products/interiors',
     swatch: 'laminate' as const,
+    image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop',
   },
   {
     id: 3,
@@ -48,6 +50,7 @@ const SLIDES = [
     secondaryLabel: 'Browse Hardware',
     secondaryLink: '/products/hardware',
     swatch: 'hardware' as const,
+    image: 'https://images.unsplash.com/photo-1558211583-05bdfa91b29c?q=80&w=1200&auto=format&fit=crop',
   }
 ];
 
@@ -230,6 +233,32 @@ export const HeroSlider = () => {
 
           {/* Signature visual column */}
           <div className="relative">
+            {/* Photo backdrop — real material/site photography, crossfading per slide.
+                Duotone-treated (not shown raw) so it sits behind the illustrated swatch
+                fan as depth/context rather than competing with it. */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="relative w-[280px] h-[300px] sm:w-[320px] sm:h-[340px] rounded-[2rem] overflow-hidden">
+                <AnimatePresence mode="sync">
+                  <motion.img
+                    key={slide.image}
+                    src={slide.image}
+                    alt=""
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.1, ease: 'easeOut' }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ filter: 'grayscale(35%) sepia(25%) saturate(1.1) contrast(1.05) brightness(0.88)' }}
+                  />
+                </AnimatePresence>
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(160deg, rgba(241,234,217,0.15) 0%, rgba(21,16,11,0.55) 100%)' }}
+                />
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2rem]" />
+              </div>
+            </div>
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -237,10 +266,24 @@ export const HeroSlider = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.5 }}
+                className="relative"
               >
                 <SwatchFan active={slide.swatch} />
               </motion.div>
             </AnimatePresence>
+
+            {/* Image dots — separate from the material-chip pagination, these hint
+                that the backdrop itself is a multi-image slideshow. */}
+            <div className="relative flex items-center justify-center gap-1.5 mt-3">
+              {SLIDES.map((s, idx) => (
+                <span
+                  key={s.id}
+                  className={`block rounded-full bg-espresso-400 transition-all duration-300 ${
+                    currentSlide === idx ? 'w-4 h-1.5 opacity-90' : 'w-1.5 h-1.5 opacity-30'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
