@@ -60,82 +60,6 @@ const SWATCH_COLORS: Record<string, string> = {
   hardware: '#5C4530',
 };
 
-// The signature visual: a fanned stack of material swatch cards — plywood
-// cross-ply, laminate sheen, wood-grain veneer, brushed hardware — because
-// that's literally what this business sells, rather than a stock lifestyle photo.
-const SwatchFan: React.FC<{ active: 'plywood' | 'laminate' | 'hardware' }> = ({ active }) => {
-  const cards = [
-    { key: 'veneer', rotate: -14, x: -58, label: 'Veneer', sub: 'Natural Teak' },
-    { key: 'hardware', rotate: -5, x: -22, label: 'Hardware', sub: 'Brass · SS304' },
-    { key: 'laminate', rotate: 5, x: 14, label: 'Laminate', sub: 'High Gloss' },
-    { key: 'plywood', rotate: 14, x: 50, label: 'Plywood', sub: 'BWP · 19mm' },
-  ];
-
-  return (
-    <div className="relative w-[300px] h-[340px] sm:w-[340px] sm:h-[380px] mx-auto">
-      {cards.map((card, i) => {
-        const isActive = card.key === active;
-        return (
-          <motion.div
-            key={card.key}
-            initial={false}
-            animate={{
-              rotate: card.rotate,
-              x: card.x,
-              y: isActive ? -14 : 0,
-              scale: isActive ? 1.04 : 1,
-            }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-1/2 top-4 -translate-x-1/2 w-[150px] h-[210px] sm:w-[168px] sm:h-[236px] rounded-2xl shadow-[0_20px_40px_-12px_rgba(21,16,11,0.35)] border border-espresso-950/10 overflow-hidden"
-            style={{ zIndex: i, transformOrigin: 'bottom center' }}
-          >
-            {card.key === 'plywood' && <div className="ply-layers w-full h-full" />}
-            {card.key === 'laminate' && (
-              <div
-                className="w-full h-full"
-                style={{ background: 'linear-gradient(135deg, #C2984F 0%, #8C6935 60%, #6C512A 100%)' }}
-              />
-            )}
-            {card.key === 'veneer' && (
-              <div
-                className="w-full h-full"
-                style={{
-                  backgroundImage:
-                    'repeating-linear-gradient(100deg, #7C5F3F 0px, #7C5F3F 2px, #A9895F 2px, #A9895F 5px, #5C4530 5px, #5C4530 7px)',
-                }}
-              />
-            )}
-            {card.key === 'hardware' && (
-              <div
-                className="w-full h-full"
-                style={{ background: 'linear-gradient(160deg, #E6CE9C 0%, #AD8342 45%, #362A1B 100%)' }}
-              />
-            )}
-
-            <div className="absolute bottom-0 inset-x-0 bg-paper/95 px-3 py-2.5">
-              <p className="font-outfit text-[11px] font-semibold text-espresso-950 leading-none">{card.label}</p>
-              <p className="font-outfit text-[9px] text-espresso-600 mt-1 tracking-wide">{card.sub}</p>
-            </div>
-          </motion.div>
-        );
-      })}
-
-      {/* Hang tag — a small signature detail, like the sample tags on real material swatches */}
-      <motion.div
-        initial={{ rotate: -8 }}
-        animate={{ rotate: [-8, -4, -8] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-2 right-2 sm:right-6 z-20"
-      >
-        <div className="w-16 h-9 bg-brass-500 rounded-md shadow-lg flex items-center justify-center relative">
-          <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-paper border-2 border-brass-700" />
-          <span className="font-outfit text-[10px] font-bold text-espresso-950 tracking-tight">EST. 1995</span>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 export const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -150,7 +74,7 @@ export const HeroSlider = () => {
 
   return (
     <section className="relative w-full flex items-center min-h-screen overflow-hidden bg-paper">
-      {/* Ambient warm glow, not a photo — keeps focus on the swatch fan and type */}
+      {/* Ambient warm glow — keeps the paper background from feeling flat */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -231,58 +155,53 @@ export const HeroSlider = () => {
             </div>
           </div>
 
-          {/* Signature visual column */}
-          <div className="relative">
-            {/* Photo backdrop — real material/site photography, crossfading per slide.
-                Duotone-treated (not shown raw) so it sits behind the illustrated swatch
-                fan as depth/context rather than competing with it. */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="relative w-[280px] h-[300px] sm:w-[320px] sm:h-[340px] rounded-[2rem] overflow-hidden">
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={slide.image}
-                    src={slide.image}
-                    alt=""
-                    initial={{ opacity: 0, scale: 1.08 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.1, ease: 'easeOut' }}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ filter: 'grayscale(35%) sepia(25%) saturate(1.1) contrast(1.05) brightness(0.88)' }}
-                  />
-                </AnimatePresence>
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(160deg, rgba(241,234,217,0.15) 0%, rgba(21,16,11,0.55) 100%)' }}
+          {/* Signature visual column — one clean, well-cropped photo per slide,
+              crossfading smoothly. No competing elements stacked on top of it. */}
+          <div className="relative w-full max-w-[440px] mx-auto lg:max-w-none">
+            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(21,16,11,0.35)]">
+              <AnimatePresence mode="sync">
+                <motion.img
+                  key={slide.image}
+                  src={slide.image}
+                  alt={slide.tag}
+                  initial={{ opacity: 0, scale: 1.06 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.2, ease: 'easeOut' }}
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2rem]" />
+              </AnimatePresence>
+
+              {/* Gentle bottom gradient — just enough for the dots below to read clearly */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-espresso-950/55 to-transparent pointer-events-none" />
+
+              {/* Hang tag — the one signature detail, not competing with the photo */}
+              <div className="absolute top-5 right-5">
+                <div className="bg-paper/95 backdrop-blur px-3.5 py-2 rounded-lg shadow-md">
+                  <span className="font-outfit text-[11px] font-bold text-espresso-950 tracking-wide">EST. 1995</span>
+                </div>
               </div>
-            </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.5 }}
-                className="relative"
-              >
-                <SwatchFan active={slide.swatch} />
-              </motion.div>
-            </AnimatePresence>
+              {/* Category label, bottom-left, sitting on the gradient */}
+              <div className="absolute bottom-5 left-5">
+                <span className="font-outfit text-xs font-semibold uppercase tracking-[0.15em] text-paper/90">
+                  {slide.tag}
+                </span>
+              </div>
 
-            {/* Image dots — separate from the material-chip pagination, these hint
-                that the backdrop itself is a multi-image slideshow. */}
-            <div className="relative flex items-center justify-center gap-1.5 mt-3">
-              {SLIDES.map((s, idx) => (
-                <span
-                  key={s.id}
-                  className={`block rounded-full bg-espresso-400 transition-all duration-300 ${
-                    currentSlide === idx ? 'w-4 h-1.5 opacity-90' : 'w-1.5 h-1.5 opacity-30'
-                  }`}
-                />
-              ))}
+              {/* Image dots, bottom-right, sitting on the gradient */}
+              <div className="absolute bottom-5 right-5 flex items-center gap-1.5">
+                {SLIDES.map((s, idx) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Show ${s.tag}`}
+                    className={`block rounded-full transition-all duration-300 ${
+                      currentSlide === idx ? 'w-5 h-1.5 bg-paper' : 'w-1.5 h-1.5 bg-paper/50 hover:bg-paper/80'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
