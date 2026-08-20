@@ -64,13 +64,13 @@ export const Header = () => {
               className="flex items-center gap-2 group cursor-pointer relative z-10"
               onMouseEnter={() => setActiveMenu(null)}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-700 group-hover:rotate-180 ${'text-stone-900'}`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-700 group-hover:rotate-180 ${isTransparent ? 'text-white' : 'text-stone-900'}`}>
                 <path d="M2 22L12 2l10 20"/>
                 <path d="M12 12h8"/>
                 <path d="M4 12h8"/>
               </svg>
               <div className="flex flex-col">
-                <span className={`font-serif text-xl font-bold tracking-wide leading-none transition-colors duration-300 ${'text-stone-900'}`}>ABHISHEK</span>
+                <span className={`font-serif text-xl font-bold tracking-wide leading-none transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-stone-900'}`}>ABHISHEK</span>
                 <span className="text-[0.6rem] font-outfit text-brass-500 tracking-widest uppercase">Ply & Hardware</span>
               </div>
             </Link>
@@ -87,7 +87,7 @@ export const Header = () => {
                     <Link 
                       to={item.href}
                       className={`font-outfit font-medium text-sm tracking-wide transition-colors relative group py-2 ${
-                        'text-stone-600 hover:text-stone-900'
+                        isTransparent ? 'text-white/85 hover:text-white' : 'text-stone-600 hover:text-stone-900'
                       }`}
                     >
                       {item.title}
@@ -96,8 +96,8 @@ export const Header = () => {
                   ) : (
                     <div 
                       className={`cursor-pointer font-outfit font-medium text-sm tracking-wide transition-colors relative group py-2 flex items-center gap-1 ${
-                        'text-stone-600 hover:text-stone-900'
-                      } ${activeMenu === item.title ? ('text-stone-900') : ''}`}
+                        isTransparent ? 'text-white/85 hover:text-white' : 'text-stone-600 hover:text-stone-900'
+                      } ${activeMenu === item.title ? (isTransparent ? 'text-white' : 'text-stone-900') : ''}`}
                     >
                       {item.title}
                       <span className={`absolute -bottom-1 left-0 h-[2px] transition-all duration-300 ${activeMenu === item.title ? 'w-full' : 'w-0'} group-hover:w-full ${'bg-brass-500'}`} />
@@ -115,7 +115,9 @@ export const Header = () => {
               <button
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search products"
-                className="p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
+                className={`p-2 rounded-full transition-colors ${
+                  isTransparent ? 'text-white/85 hover:text-white hover:bg-white/10' : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                }`}
               >
                 <Search className="w-5 h-5" />
               </button>
@@ -123,7 +125,9 @@ export const Header = () => {
               <button
                 onClick={openDrawer}
                 aria-label="View quote list"
-                className="relative p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
+                className={`relative p-2 rounded-full transition-colors ${
+                  isTransparent ? 'text-white/85 hover:text-white hover:bg-white/10' : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                }`}
               >
                 <ShoppingBag className="w-5 h-5" />
                 {totalItems > 0 && (
@@ -140,7 +144,11 @@ export const Header = () => {
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Hi, I am looking for a quote.')}`}
                   target="_blank"
                   rel="noreferrer"
-                  className={`px-6 py-2.5 rounded-full font-outfit font-medium text-sm transition-all duration-300 shadow-sm ml-2 bg-stone-900 text-white border border-stone-900 hover:bg-brass-600 hover:border-brass-600`}
+                  className={`px-6 py-2.5 rounded-full font-outfit font-medium text-sm transition-all duration-300 shadow-sm ml-2 border ${
+                    isTransparent
+                      ? 'bg-white text-espresso-950 border-white hover:bg-brass-400 hover:border-brass-400'
+                      : 'bg-stone-900 text-white border-stone-900 hover:bg-brass-600 hover:border-brass-600'
+                  }`}
                 >
                   Get Quote
                 </a>
@@ -149,7 +157,7 @@ export const Header = () => {
               {/* Mobile Menu Toggle */}
               <button 
                 onClick={() => setMobileMenuOpen(true)}
-                className={`lg:hidden p-2 -mr-2 transition-colors ${'text-stone-900'}`}
+                className={`lg:hidden p-2 -mr-2 transition-colors ${isTransparent ? 'text-white' : 'text-stone-900'}`}
               >
                 <Menu className="w-6 h-6" />
               </button>
